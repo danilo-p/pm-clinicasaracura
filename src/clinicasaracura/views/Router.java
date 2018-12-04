@@ -6,33 +6,33 @@
 package clinicasaracura.views;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author danilo
  */
 public class Router extends JFrame {
+
     private static Router uniqueInstance = null;
+
     public static Router getInstance() {
-        if(uniqueInstance == null) {
+        if (uniqueInstance == null) {
             uniqueInstance = new Router();
         }
         return uniqueInstance;
     }
-    
-    private final HomeView homeView;
-    
+
     public Router() {
         super();
-        this.homeView = new HomeView();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 500);
         this.setVisible(true);
-        
+
     }
 
-    public void goToHomeView() {
-        this.setContentPane(this.homeView);
+    public void goToView(JPanel view) {
+        this.setContentPane(view);
         this.revalidate();
     }
 }

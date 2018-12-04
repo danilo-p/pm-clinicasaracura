@@ -5,27 +5,28 @@
  */
 package clinicasaracura.views;
 
-import clinicasaracura.controllers.ClientesController;
-import clinicasaracura.models.Cliente;
-import clinicasaracura.models.Pessoa;
-import java.util.List;
-import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
  * @author danilo
  */
 public class HomeView extends JPanel {
-    private final ClientesController clientesController;
-    private final List clientes;
 
     public HomeView() {
-        clientesController = new ClientesController();
-        clientes = clientesController.getClientes();
-        for (int i = 0; i < clientes.size(); i++) {
-            Cliente cliente = (Cliente) clientes.get(i);
-            this.add(new JLabel(cliente.getPessoa().getNome()));
-        }
+        this.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.setLayout(new GridLayout(2, 2, 15, 15));
+        this.add(new JButton("Médicos"));
+        JButton clientesButton = new JButton("Clientes");
+        clientesButton.addActionListener((ActionEvent e) -> {
+            Router.getInstance().goToView(new ClientesView());
+        });
+        this.add(clientesButton);
+        this.add(new JButton("Nova Consulta"));
+        this.add(new JButton("Novo Exame"));
     }
 }

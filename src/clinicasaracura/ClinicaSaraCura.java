@@ -5,6 +5,7 @@
  */
 package clinicasaracura;
 
+import clinicasaracura.views.HomeView;
 import clinicasaracura.views.Router;
 
 /**
@@ -17,7 +18,7 @@ public class ClinicaSaraCura {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Router.getInstance().goToHomeView();
+        Router.getInstance().goToView(new HomeView());
     }
     
 }
