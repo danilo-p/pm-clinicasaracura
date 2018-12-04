@@ -5,7 +5,8 @@
  */
 package clinicasaracura.views;
 
-import clinicasaracura.controllers.HomeController;
+import clinicasaracura.controllers.ClientesController;
+import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Pessoa;
 import java.util.List;
 import javax.swing.JLabel;
@@ -16,15 +17,15 @@ import javax.swing.JPanel;
  * @author danilo
  */
 public class HomeView extends JPanel {
-    private final HomeController homeController;
-    private final List pessoas;
+    private final ClientesController clientesController;
+    private final List clientes;
 
     public HomeView() {
-        homeController = new HomeController();
-        pessoas = homeController.getPessoas();
-        for (int i = 0; i < pessoas.size(); i++) {
-            Pessoa pessoa = (Pessoa) pessoas.get(i);
-            this.add(new JLabel(pessoa.getNome()));
+        clientesController = new ClientesController();
+        clientes = clientesController.getClientes();
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente = (Cliente) clientes.get(i);
+            this.add(new JLabel(cliente.getPessoa().getNome()));
         }
     }
 }

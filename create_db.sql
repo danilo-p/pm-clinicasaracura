@@ -127,6 +127,8 @@ INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
 VALUES (2, "24:00:00", "07:00:00", "22:00:00", "00:30:00");
 INSERT INTO pessoas (id, nome, cpf, telefone, agenda_id)
 VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 2);
+INSERT INTO clientes (id, pessoa_id)
+VALUES (1, 2);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
 VALUES (1, "2018-01-01 12:00:00", 1, 2);

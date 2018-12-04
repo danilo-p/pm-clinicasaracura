@@ -29,42 +29,12 @@ public class PessoaDAO extends GenericDAO {
         update(update, pessoa.getId(), pessoa.getNome(), pessoa.getCpf(), pessoa.getTelefone());
     }
 
-    public void excluir(int id) throws SQLException {
-        String delete = "DELETE FROM pessoas WHERE id = ?";
-        delete(delete, id);
-    }
-
-    public List findPessoas() throws SQLException {
-        List pessoas = new ArrayList();
-
-        String select = "SELECT * FROM pessoas";
-
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            Pessoa pessoa = new Pessoa();
-            pessoa.setId(rs.getInt("id"));
-            pessoa.setNome(rs.getString("nome"));
-            pessoa.setCpf(rs.getString("cpf"));
-            pessoa.setTelefone(rs.getString("telefone"));
-            pessoas.add(pessoa);
-        }
-
-        rs.close();
-        stmt.close();
-        getConnection().close();
-
-        return pessoas;
-    }
-
-    public Pessoa findByName(String nome) throws SQLException {
-        String select = "SELECT * FROM pessoas WHERE nome = ?";
+    public Pessoa findById(int id) throws SQLException {
+        String select = "SELECT * FROM pessoas WHERE id = ?";
         Pessoa pessoa = null;
         PreparedStatement stmt = getConnection().prepareStatement(select);
 
-        stmt.setString(1, nome);
+        stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {

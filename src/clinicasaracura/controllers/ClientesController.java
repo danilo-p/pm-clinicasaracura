@@ -5,7 +5,7 @@
  */
 package clinicasaracura.controllers;
 
-import clinicasaracura.dao.PessoaDAO;
+import clinicasaracura.dao.ClienteDAO;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,16 +13,16 @@ import java.util.List;
  *
  * @author danilo
  */
-public class HomeController {
-    private final PessoaDAO pessoaDAO;
+public class ClientesController {
+    private final ClienteDAO clienteDAO;
 
-    public HomeController() {
-        this.pessoaDAO = new PessoaDAO();
+    public ClientesController() {
+        this.clienteDAO = new ClienteDAO();
     }
 
-    public List getPessoas() {
+    public List getClientes() {
         try {
-            return this.pessoaDAO.findPessoas();
+            return this.clienteDAO.findClientes();
         } catch (SQLException ex) {
             return null;
         }
