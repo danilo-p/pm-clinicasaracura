@@ -8,9 +8,7 @@ package clinicasaracura.controllers;
 import clinicasaracura.dao.ClienteDAO;
 import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Cliente;
-import clinicasaracura.models.Pessoa;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +25,15 @@ public class ClientesController {
     }
 
     public void criarCliente(String nome, String cpf, String telefone) {
-        Pessoa novaPessoa = new Pessoa(nome, cpf, telefone);
+        Cliente novoCliente = new Cliente();
+
+        novoCliente.setNome(nome);
+        novoCliente.setCpf(cpf);
+        novoCliente.setTelefone(telefone);
+
         Agenda novaAgenda = new Agenda();
-        novaPessoa.setAgenda(novaAgenda);
-        Cliente novoCliente = new Cliente(novaPessoa);
+        novoCliente.setAgenda(novaAgenda);
+
         try {
             this.clienteDAO.salvar(novoCliente);
         } catch (SQLException ex) {

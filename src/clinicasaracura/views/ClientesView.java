@@ -56,11 +56,10 @@ public class ClientesView extends JPanel {
         Object[][] linhas = new Object[clientes.size()][4];
         for (int i = 0; i < clientes.size(); i++) {
             Cliente cliente = (Cliente) clientes.get(i);
-            Pessoa pessoa = cliente.getPessoa();
             linhas[i][0] = cliente.getId();
-            linhas[i][1] = pessoa.getNome();
-            linhas[i][2] = pessoa.getCpf();
-            linhas[i][3] = pessoa.getTelefone();
+            linhas[i][1] = cliente.getNome();
+            linhas[i][2] = cliente.getCpf();
+            linhas[i][3] = cliente.getTelefone();
         }
 
         JTable clientesTable = new JTable(linhas, titulos);
@@ -73,7 +72,7 @@ public class ClientesView extends JPanel {
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Cliente clienteSelecionado = (Cliente) clientes.get(table.getSelectedRow());
-                    System.out.println(clienteSelecionado.getPessoa().getNome());
+                    System.out.println(clienteSelecionado.getNome());
                     // TODO: Redirecionar para a página do cliente quando tivermos uma
                 }
             }

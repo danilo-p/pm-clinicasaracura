@@ -5,6 +5,7 @@
  */
 package clinicasaracura.dao;
 
+import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Pessoa;
 import java.sql.Connection;
@@ -23,8 +24,8 @@ import java.util.List;
  */
 public class ClienteDAO extends GenericDAO {
     
-    PessoaDAO pessoaDAO;
-    AgendaDAO agendaDAO;
+    private final PessoaDAO pessoaDAO;
+    private final AgendaDAO agendaDAO;
     
     public ClienteDAO() {
         this.pessoaDAO = new PessoaDAO();
@@ -32,45 +33,39 @@ public class ClienteDAO extends GenericDAO {
     }
 
     public void salvar(Cliente cliente) throws SQLException {
-        Pessoa pessoa = cliente.getPessoa();
-        this.pessoaDAO.salvar(pessoa);
-        String insert = "INSERT INTO clientes(pessoa_id) VALUES(?)";
-        int id = save(insert, pessoa.getId());
-        if (id > 0) {
-            cliente.setId(id);
-        }
-    }
-
-    public void alterar(Cliente cliente) throws SQLException {
-        Pessoa pessoa = cliente.getPessoa();
-        this.agendaDAO.alterar(pessoa.getAgenda());
-        this.pessoaDAO.alterar(pessoa);
-        String update = "UPDATE clientes SET pessoa_id = ? WHERE id = ?";
-        update(update, cliente.getId(), cliente.getPessoa().getId());
+        this.pessoaDAO.salvar(cliente);
     }
 
     public List findClientes() throws SQLException {
-        List clientes = new ArrayList();
+        List pessoas = new ArrayList();
 
-        String select = "SELECT * FROM clientes";
+        String select = "SELECT * FROM pessoas WHERE tipo = 0";
 
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement(select);
+        
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
             Cliente cliente = new Cliente();
+
             cliente.setId(rs.getInt("id"));
-            int pessoaId = rs.getInt("pessoa_id");
-            Pessoa pessoa = this.pessoaDAO.findById(pessoaId);
-            cliente.setPessoa(pessoa);
-            clientes.add(cliente);
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setTipo(rs.getInt("tipo"));
+
+            int agendaId = rs.getInt("agenda_id");
+            Agenda agenda = this.agendaDAO.findById(agendaId);
+            cliente.setAgenda(agenda);
+
+            pessoas.add(cliente);
         }
 
         rs.close();
         stmt.close();
         connection.close();
 
-        return clientes;
+        return pessoas;
     }
 }

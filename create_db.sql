@@ -12,25 +12,6 @@ CREATE TABLE agendas (
   PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS pessoas;
-CREATE TABLE pessoas (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(255) NOT NULL,
-  cpf VARCHAR(255) NOT NULL,
-  telefone VARCHAR(255) NOT NULL,
-  agenda_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (agenda_id) REFERENCES agendas(id)
-);
-
-DROP TABLE IF EXISTS clientes;
-CREATE TABLE clientes (
-  id INT NOT NULL AUTO_INCREMENT,
-  pessoa_id INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (pessoa_id) REFERENCES pessoas(id)
-);
-
 DROP TABLE IF EXISTS especialidades;
 CREATE TABLE especialidades (
   id INT NOT NULL AUTO_INCREMENT,
@@ -38,14 +19,18 @@ CREATE TABLE especialidades (
   PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS medicos;
-CREATE TABLE medicos (
+DROP TABLE IF EXISTS pessoas;
+CREATE TABLE pessoas (
   id INT NOT NULL AUTO_INCREMENT,
-  pessoa_id INT NOT NULL,
-  especialidade_id INT NOT NULL,
+  nome VARCHAR(255) NOT NULL,
+  cpf VARCHAR(255) NOT NULL,
+  telefone VARCHAR(255) NOT NULL,
+  tipo INT NOT NULL DEFAULT 0,
+  especialidade_id INT DEFAULT NULL,
+  agenda_id INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (pessoa_id) REFERENCES pessoas(id),
-  FOREIGN KEY (especialidade_id) REFERENCES especialidades(id)
+  FOREIGN KEY (especialidade_id) REFERENCES especialidades(id),
+  FOREIGN KEY (agenda_id) REFERENCES agendas(id)
 );
 
 DROP TABLE IF EXISTS consultas;
@@ -118,17 +103,13 @@ VALUES (1, "Raio X", 1, 3);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
 VALUES (1, "08:00:00", "07:00:00", "19:00:00", "00:30:00");
-INSERT INTO pessoas (id, nome, cpf, telefone, agenda_id)
-VALUES (1, "Fulano Medico", "123.456.789-10", "(12) 12345-1234", 1);
-INSERT INTO medicos (id, pessoa_id, especialidade_id)
-VALUES (1, 1, 1);
+INSERT INTO pessoas (id, nome, cpf, telefone, tipo, especialidade_id, agenda_id)
+VALUES (1, "Fulano Medico", "123.456.789-10", "(12) 12345-1234", 1, 1, 1);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
 VALUES (2, "24:00:00", "07:00:00", "22:00:00", "00:30:00");
-INSERT INTO pessoas (id, nome, cpf, telefone, agenda_id)
-VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 2);
-INSERT INTO clientes (id, pessoa_id)
-VALUES (1, 2);
+INSERT INTO pessoas (id, nome, cpf, telefone, tipo, agenda_id)
+VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 0, 2);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
 VALUES (1, "2018-01-01 12:00:00", 1, 2);

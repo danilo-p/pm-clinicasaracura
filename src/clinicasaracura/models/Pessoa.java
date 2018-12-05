@@ -12,27 +12,29 @@ package clinicasaracura.models;
  */
 public class Pessoa extends Agendavel {
 
-    private Integer id;
+    private int id;
     private String nome;
     private String cpf;
     private String telefone;
+    private int tipo;
 
     public Pessoa() {
         super();
     }
 
-    public Pessoa(String nome, String cpf, String telefone) {
+    public Pessoa(String nome, String cpf, String telefone, int tipo) {
         super();
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.tipo = tipo;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,4 +61,13 @@ public class Pessoa extends Agendavel {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
 }

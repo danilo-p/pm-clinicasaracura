@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
  */
 public class Agenda {
 
-    private Integer id;
+    private int id;
     private Time cargaHoraria;
     private Time horaInicio;
     private Time horaFim;
@@ -40,11 +40,11 @@ public class Agenda {
         this.tempoIntervalo = tempoIntervalo;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

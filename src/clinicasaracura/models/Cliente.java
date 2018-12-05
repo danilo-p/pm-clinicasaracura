@@ -10,31 +10,5 @@ package clinicasaracura.models;
  *
  * @author danilo
  */
-public class Cliente {
-
-    private Integer id;
-    private Pessoa pessoa;
-
-    public Cliente() {
-    }
-
-    public Cliente(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+public class Cliente extends Pessoa {
 }
