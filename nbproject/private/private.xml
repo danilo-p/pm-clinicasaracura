@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/dao/PessoaDAO.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/controllers/ClientesController.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/dao/AgendaDAO.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/dao/GenericDAO.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/models/Pessoa.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/models/Agenda.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/models/Cliente.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/views/ClientesView.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/views/CadastroClienteView.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/dao/ConnectionDatabase.java</file>
-            <file>file:/Users/danilo/NetBeansProjects/ClinicaSaraCura/src/clinicasaracura/dao/ClienteDAO.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Agenda.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/views/ClientesView.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/ClinicaSaraCura.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Agendavel.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Pessoa.java</file>
+            <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
