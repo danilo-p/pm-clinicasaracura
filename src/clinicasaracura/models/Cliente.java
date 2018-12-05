@@ -17,8 +17,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int id, Pessoa pessoa) {
-        this.id = id;
+    public Cliente(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
 
@@ -37,5 +36,4 @@ public class Cliente {
     public void setId(Integer id) {
         this.id = id;
     }
-
 }

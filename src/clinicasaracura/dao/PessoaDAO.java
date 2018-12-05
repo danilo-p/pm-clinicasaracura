@@ -5,7 +5,9 @@
  */
 package clinicasaracura.dao;
 
+import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Pessoa;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +19,20 @@ import java.util.List;
  * @author danilo
  */
 public class PessoaDAO extends GenericDAO {
+    private AgendaDAO agendaDAO;
+    
+    public PessoaDAO () {
+        this.agendaDAO = new AgendaDAO();
+    }
+    
     public void salvar(Pessoa pessoa) throws SQLException {
-        String insert = "INSERT INTO pessoas(nome, cpf, telefone) VALUES(?,?,?)";
-        save(insert, pessoa.getNome(), pessoa.getCpf(), pessoa.getTelefone());
+        Agenda agenda = pessoa.getAgenda();
+        this.agendaDAO.salvar(agenda);
+        String insert = "INSERT INTO pessoas(nome, cpf, telefone, agenda_id) VALUES(?,?,?,?)";
+        int id = save(insert, pessoa.getNome(), pessoa.getCpf(), pessoa.getTelefone(), agenda.getId());
+        if (id > 0) {
+            pessoa.setId(id);
+        }
     }
 
     public void alterar(Pessoa pessoa) throws SQLException {
@@ -31,23 +44,27 @@ public class PessoaDAO extends GenericDAO {
 
     public Pessoa findById(int id) throws SQLException {
         String select = "SELECT * FROM pessoas WHERE id = ?";
-        Pessoa pessoa = null;
-        PreparedStatement stmt = getConnection().prepareStatement(select);
+        Connection connection = getConnection();
+        PreparedStatement stmt = connection.prepareStatement(select);
 
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
 
+        Pessoa pessoa = null;
         while (rs.next()) {
             pessoa = new Pessoa();
             pessoa.setId(rs.getInt("id"));
             pessoa.setNome(rs.getString("nome"));
             pessoa.setCpf(rs.getString("cpf"));
             pessoa.setTelefone(rs.getString("telefone"));
+            int agendaId = rs.getInt("agenda_id");
+            Agenda agenda = this.agendaDAO.findById(agendaId);
+            pessoa.setAgenda(agenda);
         }
 
         rs.close();
         stmt.close();
-        getConnection().close();
+        connection.close();
 
         return pessoa;
     }

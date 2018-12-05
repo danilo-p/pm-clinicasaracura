@@ -9,6 +9,7 @@ import clinicasaracura.controllers.ClientesController;
 import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Pessoa;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JButton;
@@ -30,7 +31,16 @@ public class ClientesView extends JPanel {
 
         JLabel titulo = new JLabel("Clientes");
         titulo.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(titulo, BorderLayout.NORTH);
+        
+        JButton novoButton = new JButton("Novo");
+        novoButton.addActionListener((ActionEvent e) -> {
+            Router.getInstance().goToView(new NovoClienteView());
+        });
+        JPanel tituloPanel = new JPanel();
+        tituloPanel.setLayout(new GridLayout( 1, 2, 0, 0 ));
+        tituloPanel.add(titulo);
+        tituloPanel.add(novoButton);
+        this.add(tituloPanel, BorderLayout.NORTH);
         
         String[] titulos = {"ID", "Nome", "CPF", "Telefone"};
         ClientesController clientesController = new ClientesController();

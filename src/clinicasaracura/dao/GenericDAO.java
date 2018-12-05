@@ -7,7 +7,10 @@ package clinicasaracura.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,30 +18,49 @@ import java.sql.SQLException;
  */
 public abstract class GenericDAO {
 
-    private final Connection connection;
-
-    protected GenericDAO() {
-        this.connection = ConnectionDatabase.getConnection();
-    }
-
     protected Connection getConnection() {
-        return connection;
+        return ConnectionDatabase.getConnection();
     }
 
-    protected void save(String insertSql, Object... parametros) throws SQLException {
-        PreparedStatement pstmt = getConnection().prepareStatement(insertSql);
+    protected int save(String insertSql, Object... parametros) {
+        int id = -1;
+        System.out.println("ASDJFASL;DKJF");
+        try {
+            Connection connection = getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(insertSql,
+                Statement.RETURN_GENERATED_KEYS);
+            
+            System.out.println(insertSql);
 
-        for (int i = 0; i < parametros.length; i++) {
-            pstmt.setObject(i + 1, parametros[i]);
+            for (int i = 0; i < parametros.length; i++) {
+                pstmt.setObject(i + 1, parametros[i]);
+            }
+
+            pstmt.executeUpdate();
+            
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()){ 
+                id = generatedKeys.getInt(1);
+                System.out.println("Deu bom " + id);
+            } else {
+                System.out.println("Deu ruim");
+            }
+
+            pstmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("@#$%ˆˆ*()");
+            System.out.println(ex);
         }
-
-        pstmt.execute();
-        pstmt.close();
-        connection.close();
+        
+        System.out.println("23456789");
+        
+        return id;
     }
 
     protected void update(String updateSql, Object id, Object... parametros) throws SQLException {
-        PreparedStatement pstmt = getConnection().prepareStatement(updateSql);
+        Connection connection = getConnection();
+        PreparedStatement pstmt = connection.prepareStatement(updateSql);
 
         for (int i = 0; i < parametros.length; i++) {
             pstmt.setObject(i + 1, parametros[i]);
@@ -50,7 +72,8 @@ public abstract class GenericDAO {
     }
 
     protected void delete(String deleteSql, Object... parametros) throws SQLException {
-        PreparedStatement pstmt = getConnection().prepareStatement(deleteSql);
+        Connection connection = getConnection();
+        PreparedStatement pstmt = connection.prepareStatement(deleteSql);
 
         for (int i = 0; i < parametros.length; i++) {
             pstmt.setObject(i + 1, parametros[i]);

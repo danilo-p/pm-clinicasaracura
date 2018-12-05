@@ -9,7 +9,7 @@ package clinicasaracura.models;
  *
  * @author danilo
  */
-public class Pessoa {
+public class Pessoa extends Agendavel {
 
     private Integer id;
     private String nome;
@@ -17,10 +17,11 @@ public class Pessoa {
     private String telefone;
 
     public Pessoa() {
+        super();
     }
 
-    public Pessoa(Integer id, String nome, String cpf, String telefone) {
-        this.id = id;
+    public Pessoa(String nome, String cpf, String telefone) {
+        super();
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
