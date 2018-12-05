@@ -8,20 +8,20 @@ package clinicasaracura.models;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
+ * Modelo para agenda.
  *
  * @author danilo
  */
 public class Agenda {
+
     private Integer id;
     private Time cargaHoraria;
     private Time horaInicio;
     private Time horaFim;
     private Time tempoIntervalo;
-    
+
     public Agenda() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         try {
@@ -32,7 +32,7 @@ public class Agenda {
         } catch (ParseException ex) {
         }
     }
-    
+
     public Agenda(Time cargaHoraria, Time horaInicio, Time horaFim, Time tempoIntervalo) {
         this.cargaHoraria = cargaHoraria;
         this.horaInicio = horaInicio;
@@ -79,6 +79,5 @@ public class Agenda {
     public void setTempoIntervalo(Time tempoIntervalo) {
         this.tempoIntervalo = tempoIntervalo;
     }
-    
-    
+
 }

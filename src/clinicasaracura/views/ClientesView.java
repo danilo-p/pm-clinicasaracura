@@ -20,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Página de listagem de clientes com botão que leva à página de cadastro de
+ * cliente
  *
  * @author danilo
  */
@@ -29,22 +31,25 @@ public class ClientesView extends JPanel {
         this.setBorder(new EmptyBorder(15, 15, 15, 15));
         this.setLayout(new BorderLayout(15, 15));
 
+        JPanel tituloPanel = new JPanel();
+        tituloPanel.setLayout(new GridLayout(1, 2, 0, 0));
+
         JLabel titulo = new JLabel("Clientes");
         titulo.setAlignmentX(CENTER_ALIGNMENT);
-        
+        tituloPanel.add(titulo);
+
         JButton novoButton = new JButton("Novo");
         novoButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new NovoClienteView());
+            Router.getInstance().goToView(new CadastroClienteView());
         });
-        JPanel tituloPanel = new JPanel();
-        tituloPanel.setLayout(new GridLayout( 1, 2, 0, 0 ));
-        tituloPanel.add(titulo);
         tituloPanel.add(novoButton);
+
         this.add(tituloPanel, BorderLayout.NORTH);
-        
-        String[] titulos = {"ID", "Nome", "CPF", "Telefone"};
+
         ClientesController clientesController = new ClientesController();
         List clientes = clientesController.getClientes();
+
+        String[] titulos = {"ID", "Nome", "CPF", "Telefone"};
         Object[][] linhas = new Object[clientes.size()][4];
         for (int i = 0; i < clientes.size(); i++) {
             Cliente cliente = (Cliente) clientes.get(i);
@@ -54,7 +59,7 @@ public class ClientesView extends JPanel {
             linhas[i][2] = pessoa.getCpf();
             linhas[i][3] = pessoa.getTelefone();
         }
-        
+
         JTable clientesTable;
         clientesTable = new JTable(linhas, titulos);
         JScrollPane scrollPane = new JScrollPane(clientesTable);

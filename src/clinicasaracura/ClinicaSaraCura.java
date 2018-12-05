@@ -9,6 +9,7 @@ import clinicasaracura.views.HomeView;
 import clinicasaracura.views.Router;
 
 /**
+ * Classe principal que deve somente iniciar a aplicação na página home.
  *
  * @author danilo
  */
@@ -20,5 +21,5 @@ public class ClinicaSaraCura {
     public static void main(String[] args) {
         Router.getInstance().goToView(new HomeView());
     }
-    
+
 }

@@ -11,20 +11,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
+ * Data Access Object para o modelo Pessoa.
+ *
+ * @see https://pt.wikipedia.org/wiki/Objeto_de_acesso_a_dados
  *
  * @author danilo
  */
 public class PessoaDAO extends GenericDAO {
+
     private AgendaDAO agendaDAO;
-    
-    public PessoaDAO () {
+
+    public PessoaDAO() {
         this.agendaDAO = new AgendaDAO();
     }
-    
+
     public void salvar(Pessoa pessoa) throws SQLException {
         Agenda agenda = pessoa.getAgenda();
         this.agendaDAO.salvar(agenda);

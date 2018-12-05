@@ -6,6 +6,7 @@
 package clinicasaracura.models;
 
 /**
+ * Modelo para clientes.
  *
  * @author danilo
  */

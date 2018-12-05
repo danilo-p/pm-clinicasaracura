@@ -13,6 +13,9 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
+ * Data Access Object genérico.
+ *
+ * @see https://pt.wikipedia.org/wiki/Objeto_de_acesso_a_dados
  *
  * @author danilo
  */

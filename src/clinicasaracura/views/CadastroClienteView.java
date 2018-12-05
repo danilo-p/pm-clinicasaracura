@@ -6,32 +6,24 @@
 package clinicasaracura.views;
 
 import clinicasaracura.controllers.ClientesController;
-import clinicasaracura.models.Cliente;
-import clinicasaracura.models.Pessoa;
 import java.awt.BorderLayout;
 import static java.awt.Component.CENTER_ALIGNMENT;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Página de cadastro de cliente
  *
  * @author danilo
  */
-public class NovoClienteView extends JPanel {
+public class CadastroClienteView extends JPanel {
 
-    public NovoClienteView() {
+    public CadastroClienteView() {
         this.setBorder(new EmptyBorder(15, 15, 15, 15));
         this.setLayout(new BorderLayout(15, 15));
 
@@ -45,12 +37,12 @@ public class NovoClienteView extends JPanel {
         fieldsPanel.add(nomeLabel);
         JTextField nomeField = new JTextField(1);
         fieldsPanel.add(nomeField);
-        
+
         JLabel cpfLabel = new JLabel("CPF:");
         fieldsPanel.add(cpfLabel);
         JTextField cpfField = new JTextField(1);
         fieldsPanel.add(cpfField);
-        
+
         JLabel telefoneLabel = new JLabel("Telefone:");
         fieldsPanel.add(telefoneLabel);
         JTextField telefoneField = new JTextField(1);

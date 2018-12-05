@@ -10,6 +10,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * Conexão com o banco de dados. Abre uma conexão com o banco de dados local.
+ *
+ * TODO: Receber credenciais do banco de dados através de um arquivo de
+ * configuração.
  *
  * @author danilo
  */

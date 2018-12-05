@@ -6,13 +6,15 @@
 package clinicasaracura.dao;
 
 import clinicasaracura.models.Agenda;
-import clinicasaracura.models.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Data Access Object para o modelo Agenda.
+ *
+ * @see https://pt.wikipedia.org/wiki/Objeto_de_acesso_a_dados
  *
  * @author danilo
  */

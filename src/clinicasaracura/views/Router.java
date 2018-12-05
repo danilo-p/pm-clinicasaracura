@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
+ * Roteador do aplicativo usado para mudança de views
  *
  * @author danilo
  */

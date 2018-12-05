@@ -6,14 +6,18 @@
 package clinicasaracura.models;
 
 /**
+ * Abstração de entidades que são agendáveis. Se ela é agendável, então ela tem
+ * uma agenda.
  *
  * @author danilo
  */
 public abstract class Agendavel {
+
     protected Agenda agenda;
-    
-    public Agendavel() {}
-    
+
+    public Agendavel() {
+    }
+
     public Agendavel(Agenda agenda) {
         this.agenda = agenda;
     }
