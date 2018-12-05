@@ -10,7 +10,10 @@ import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Pessoa;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -60,8 +63,23 @@ public class ClientesView extends JPanel {
             linhas[i][3] = pessoa.getTelefone();
         }
 
-        JTable clientesTable;
-        clientesTable = new JTable(linhas, titulos);
+        JTable clientesTable = new JTable(linhas, titulos);
+        clientesTable.setDefaultEditor(Object.class, null);
+        clientesTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    Cliente clienteSelecionado = (Cliente) clientes.get(table.getSelectedRow());
+                    System.out.println(clienteSelecionado.getPessoa().getNome());
+                    // TODO: Redirecionar para a página do cliente quando tivermos uma
+                }
+            }
+        });
+        
+
         JScrollPane scrollPane = new JScrollPane(clientesTable);
         clientesTable.setFillsViewportHeight(true);
         this.add(scrollPane, BorderLayout.CENTER);
