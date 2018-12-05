@@ -57,28 +57,19 @@ public class ClienteDAO extends GenericDAO {
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement(select);
         ResultSet rs = stmt.executeQuery();
-        
-        System.out.println("adkfjalkdsfjaldf 1");
 
         while (rs.next()) {
-            System.out.println("adkfjalkdsfjaldf 2");
             Cliente cliente = new Cliente();
             cliente.setId(rs.getInt("id"));
             int pessoaId = rs.getInt("pessoa_id");
-            System.out.println("adkfjalkdsfjaldf 3");
             Pessoa pessoa = this.pessoaDAO.findById(pessoaId);
             cliente.setPessoa(pessoa);
             clientes.add(cliente);
-            System.out.println("adkfjalkdsfjaldf 4");
         }
-        
-        System.out.println("adkfjalkdsfjaldf 5");
 
         rs.close();
         stmt.close();
         connection.close();
-        
-        System.out.println("adkfjalkdsfjaldf 6");
 
         return clientes;
     }

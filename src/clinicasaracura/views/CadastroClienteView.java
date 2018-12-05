@@ -8,8 +8,10 @@ package clinicasaracura.views;
 import clinicasaracura.controllers.ClientesController;
 import java.awt.BorderLayout;
 import static java.awt.Component.CENTER_ALIGNMENT;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,21 +34,31 @@ public class CadastroClienteView extends JPanel {
         this.add(titulo, BorderLayout.NORTH);
 
         JPanel fieldsPanel = new JPanel();
+        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
 
+        JPanel nomeFieldPanel = new JPanel();
         JLabel nomeLabel = new JLabel("Nome:");
-        fieldsPanel.add(nomeLabel);
+        nomeFieldPanel.add(nomeLabel);
         JTextField nomeField = new JTextField(1);
-        fieldsPanel.add(nomeField);
+        nomeField.setColumns(20);
+        nomeFieldPanel.add(nomeField);
+        fieldsPanel.add(nomeFieldPanel);
 
+        JPanel cpfFieldPanel = new JPanel();
         JLabel cpfLabel = new JLabel("CPF:");
-        fieldsPanel.add(cpfLabel);
+        cpfFieldPanel.add(cpfLabel);
         JTextField cpfField = new JTextField(1);
-        fieldsPanel.add(cpfField);
+        cpfField.setColumns(20);
+        cpfFieldPanel.add(cpfField);
+        fieldsPanel.add(cpfFieldPanel);
 
+        JPanel telefoneFieldPanel = new JPanel();
         JLabel telefoneLabel = new JLabel("Telefone:");
-        fieldsPanel.add(telefoneLabel);
+        telefoneFieldPanel.add(telefoneLabel);
         JTextField telefoneField = new JTextField(1);
-        fieldsPanel.add(telefoneField);
+        telefoneField.setColumns(20);
+        telefoneFieldPanel.add(telefoneField);
+        fieldsPanel.add(telefoneFieldPanel);
 
         this.add(fieldsPanel, BorderLayout.CENTER);
 
@@ -55,7 +67,7 @@ public class CadastroClienteView extends JPanel {
 
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new HomeView());
+            Router.getInstance().goToView(new ClientesView());
         });
         rodapePanel.add(voltarButton);
 
