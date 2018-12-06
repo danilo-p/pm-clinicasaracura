@@ -13,6 +13,10 @@ public class Especialidade {
     private int id;
     private String nome;
     
+    public Especialidade(){
+    
+    }
+    
     Especialidade(int id, String nome)
     {
         this.id = id;
