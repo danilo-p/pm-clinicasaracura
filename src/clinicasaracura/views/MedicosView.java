@@ -43,7 +43,7 @@ public class MedicosView extends JPanel{
 
         JButton novoButton = new JButton("Novo");
         novoButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new CadastroClienteView());
+            Router.getInstance().goToView(new CadastroMedicoView());
         });
         tituloPanel.add(novoButton);
 
@@ -74,7 +74,7 @@ public class MedicosView extends JPanel{
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
                     System.out.println(medicoSelecionado.getNome());
-                    // TODO: Redirecionar para a página do cliente quando tivermos uma
+                    // TODO: Redirecionar para a página do medico quando tivermos uma
                 }
             }
         });

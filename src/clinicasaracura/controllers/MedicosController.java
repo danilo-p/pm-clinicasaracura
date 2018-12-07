@@ -25,21 +25,21 @@ public class MedicosController {
         this.medicoDAO = new MedicoDAO();
     }
 
-    public void criarMedico(String nome, String cpf, String telefone, String nomeEspecialidade) {
+    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade) {
         Medico novoMedico = new Medico();
 
         novoMedico.setNome(nome);
         novoMedico.setCpf(cpf);
         novoMedico.setTelefone(telefone);
+        novoMedico.setTipo(1);
         
-        Especialidade novaEspecialidade = new Especialidade();
-        novoMedico.setEspecialidade(novaEspecialidade);
+        novoMedico.setEspecialidade(especialidade);
 
         Agenda novaAgenda = new Agenda();
         novoMedico.setAgenda(novaAgenda);
 
         try {
-            this.medicoDAO.salvar(novoMedico);
+            this.medicoDAO.salvarMedico(novoMedico);
         } catch (SQLException ex) {
             System.out.println("MedicosController: Falha ao salvar medico.");
             System.out.println(ex);

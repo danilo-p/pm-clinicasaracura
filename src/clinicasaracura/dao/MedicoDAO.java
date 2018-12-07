@@ -34,8 +34,14 @@ public class MedicoDAO extends GenericDAO{
         this.especialidadeDAO = new EspecialidadeDAO();
     }
 
-    public void salvar(Medico medico) throws SQLException {
-        this.pessoaDAO.salvar(medico);
+    public void salvarMedico(Medico medico) throws SQLException {
+        Agenda agenda = medico.getAgenda();
+        this.agendaDAO.salvar(agenda);
+        String insert = "INSERT INTO pessoas(nome, cpf, telefone, tipo, especialidade_id, agenda_id) VALUES(?,?,?,?,?,?)";
+        int id = save(insert, medico.getNome(), medico.getCpf(), medico.getTelefone(), medico.getTipo(), medico.getEspecialidade().getId(), agenda.getId());
+        if (id > 0) {
+            medico.setId(id);
+        }
     }
 
     public List findMedicos() throws SQLException {
