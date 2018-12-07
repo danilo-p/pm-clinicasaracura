@@ -93,8 +93,16 @@ CREATE TABLE pagamentos_particular (
   FOREIGN KEY (pagamento_id) REFERENCES pagamentos(id)
 );
 
-INSERT INTO especialidades (id, nome)
-VALUES (1, "Traumatologia");
+INSERT INTO especialidades (nome) VALUES ("Traumatologia");
+INSERT INTO especialidades (nome) VALUES ("Cardiologia");
+INSERT INTO especialidades (nome) VALUES ("Pneumologia");
+INSERT INTO especialidades (nome) VALUES ("Ortopedia");
+INSERT INTO especialidades (nome) VALUES ("Oftalmologia");
+INSERT INTO especialidades (nome) VALUES ("Gastroenterologia");
+INSERT INTO especialidades (nome) VALUES ("Urologia");
+INSERT INTO especialidades (nome) VALUES ("Otorrinolaringologia");
+INSERT INTO especialidades (nome) VALUES ("Neurologia");
+INSERT INTO especialidades (nome) VALUES ("Pediatria");
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
 VALUES (3, "08:00:00", "07:00:00", "19:00:00", "00:30:00");
