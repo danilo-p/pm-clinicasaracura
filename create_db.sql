@@ -37,6 +37,7 @@ DROP TABLE IF EXISTS consultas;
 CREATE TABLE consultas (
   id INT NOT NULL AUTO_INCREMENT,
   data DATETIME NOT NULL,
+  duracao TIME NOT NULL DEFAULT "01:00:00",
   medico_id INT NOT NULL,
   cliente_id INT NOT NULL,
   PRIMARY KEY (id),

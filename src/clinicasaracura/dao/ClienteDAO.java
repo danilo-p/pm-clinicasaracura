@@ -7,7 +7,6 @@ package clinicasaracura.dao;
 
 import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Cliente;
-import clinicasaracura.models.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,5 +66,36 @@ public class ClienteDAO extends GenericDAO {
         connection.close();
 
         return pessoas;
+    }
+    
+    public Cliente findById(int id) throws SQLException {
+        String select = "SELECT * FROM pessoas WHERE id = ? AND tipo = 0";
+        Cliente cliente = null;
+        Connection connection = getConnection();
+        PreparedStatement stmt = connection.prepareStatement(select);
+
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            cliente = new Cliente();
+
+            cliente.setId(rs.getInt("id"));
+            cliente.setId(rs.getInt("id"));
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setTipo(rs.getInt("tipo"));
+            
+            int agendaId = rs.getInt("agenda_id");
+            Agenda agenda = this.agendaDAO.findById(agendaId);
+            cliente.setAgenda(agenda);
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return cliente;
     }
 }
