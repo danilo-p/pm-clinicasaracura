@@ -6,14 +6,8 @@
 package clinicasaracura.dao;
 
 import clinicasaracura.models.Agenda;
-import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Pessoa;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Data Access Object para o modelo Pessoa.
