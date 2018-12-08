@@ -26,6 +26,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  * Página de cadastro de cliente
@@ -35,10 +38,13 @@ import javax.swing.border.EmptyBorder;
 public class CadastroMedicoView extends JPanel {
     
     private final EspecialidadeDAO especialidadeDAO;
+    
+    private String[] intervalo;
 
     public CadastroMedicoView() {
         
         this.especialidadeDAO = new EspecialidadeDAO();
+        this.intervalo = new String[]{"00:15:00","00:20:00","00:30:00"};
         
         this.setBorder(new EmptyBorder(15, 15, 15, 15));
         this.setLayout(new BorderLayout(15, 15));
@@ -73,6 +79,36 @@ public class CadastroMedicoView extends JPanel {
         telefoneField.setColumns(20);
         telefoneFieldPanel.add(telefoneField);
         fieldsPanel.add(telefoneFieldPanel);
+        
+        JPanel horaInicioFieldPanel = new JPanel();
+        JLabel horaInicioLabel = new JLabel("Hora início:");
+        horaInicioFieldPanel.add(horaInicioLabel);
+        JTextField horaInicioField = new JTextField(1);
+        horaInicioField.setColumns(5);
+        horaInicioFieldPanel.add(horaInicioField);
+        fieldsPanel.add(horaInicioFieldPanel);
+        
+        JPanel horaFimFieldPanel = new JPanel();
+        JLabel horaFimLabel = new JLabel("Hora fim:");
+        horaFimFieldPanel.add(horaFimLabel);
+        JTextField horaFimField = new JTextField(1);
+        horaFimField.setColumns(5);
+        horaFimFieldPanel.add(horaFimField);
+        fieldsPanel.add(horaFimFieldPanel);
+        
+        JPanel intervaloFieldPanel = new JPanel();
+        JLabel intervaloLabel = new JLabel("Tempo intervalo:");
+        intervaloFieldPanel.add(intervaloLabel);
+        JComboBox<String> intervaloComboBox = new JComboBox<String>();
+        intervaloFieldPanel.add(intervaloComboBox);
+        fieldsPanel.add(intervaloFieldPanel);
+        for (int i = 0; i < intervalo.length; i++) {
+            String number = intervalo[i];
+            intervaloComboBox.addItem(number); 
+        }
+        intervaloComboBox.addActionListener((ActionEvent e) -> {
+            String textoIntervaloComboBox = (String) intervaloComboBox.getSelectedItem();
+        });
         
         JPanel especialidadeFieldPanel = new JPanel();
         JLabel especialidadeLabel = new JLabel("Especialidade:");
@@ -125,8 +161,9 @@ public class CadastroMedicoView extends JPanel {
         cadastrarButton.addActionListener((ActionEvent e) -> {
             
             Especialidade especialidade = null;
-            
+        
             String textoComboBox = (String) especialidadeComboBox.getSelectedItem();
+            String textoIntervaloComboBox = (String) intervaloComboBox.getSelectedItem();
             
             if( ("Outra".equals(textoComboBox)) && !"".equals(especialidadeField.getText())){
                 
@@ -145,9 +182,8 @@ public class CadastroMedicoView extends JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(CadastroMedicoView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }         
-            
-            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade);
+            } 
+            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade, horaInicioField.getText(), horaFimField.getText(), textoIntervaloComboBox);
             Router.getInstance().goToView(new MedicosView());
         });
         rodapePanel.add(cadastrarButton);

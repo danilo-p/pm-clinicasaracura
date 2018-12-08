@@ -12,6 +12,9 @@ import clinicasaracura.models.Especialidade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -20,12 +23,15 @@ import java.util.List;
 public class MedicosController {
 
     private final MedicoDAO medicoDAO;
+    private Time horaInicio;
+    private Time horaFim;
+    private Time tempoIntervalo;
 
     public MedicosController() {
         this.medicoDAO = new MedicoDAO();
     }
 
-    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade) {
+    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade, String horaInicial, String horaFinal, String intervalo) {
         Medico novoMedico = new Medico();
 
         novoMedico.setNome(nome);
@@ -37,6 +43,16 @@ public class MedicosController {
 
         Agenda novaAgenda = new Agenda();
         novoMedico.setAgenda(novaAgenda);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        try {
+            this.horaInicio = new Time(sdf.parse(horaInicial).getTime());
+            this.horaFim = new Time(sdf.parse(horaFinal).getTime());
+            this.tempoIntervalo = new Time(sdf.parse(intervalo).getTime());
+        } catch (ParseException ex) {
+        }
+        novaAgenda.setHoraInicio(horaInicio);
+        novaAgenda.setHoraFim(horaFim);
+        novaAgenda.setTempoIntervalo(tempoIntervalo);
 
         try {
             this.medicoDAO.salvarMedico(novoMedico);
