@@ -25,10 +25,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.FlowLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 /**
  * Página de cadastro de cliente
@@ -40,14 +40,17 @@ public class CadastroMedicoView extends JPanel {
     private final EspecialidadeDAO especialidadeDAO;
     
     private String[] intervalo;
-
+    
+    private JCheckBox seg,ter,qua,qui,sex;
+    private String[] dias = new String[3];
+    
     public CadastroMedicoView() {
         
         this.especialidadeDAO = new EspecialidadeDAO();
         this.intervalo = new String[]{"00:15:00","00:20:00","00:30:00"};
         
-        this.setBorder(new EmptyBorder(15, 15, 15, 15));
-        this.setLayout(new BorderLayout(15, 15));
+        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        this.setLayout(new BorderLayout(5, 5));
 
         JLabel titulo = new JLabel("Novo médico");
         titulo.setAlignmentX(CENTER_ALIGNMENT);
@@ -109,6 +112,25 @@ public class CadastroMedicoView extends JPanel {
         intervaloComboBox.addActionListener((ActionEvent e) -> {
             String textoIntervaloComboBox = (String) intervaloComboBox.getSelectedItem();
         });
+        
+        JPanel cargaHorariaFieldPanel = new JPanel();
+        JLabel cargaHorariaLabel = new JLabel("Dias da semana:");
+        cargaHorariaFieldPanel.add(cargaHorariaLabel);
+        seg = new JCheckBox("S");
+        cargaHorariaFieldPanel.add(seg);
+        ter = new JCheckBox("T");
+        cargaHorariaFieldPanel.add(ter);
+        qua = new JCheckBox("Q");
+        cargaHorariaFieldPanel.add(qua);
+        qui = new JCheckBox("Q");
+        cargaHorariaFieldPanel.add(qui);
+        sex = new JCheckBox("S");
+        cargaHorariaFieldPanel.add(sex);
+        /*for (String dia : dias) {
+            checkbox = new JCheckBox(dia);
+            cargaHorariaFieldPanel.add(checkbox);  
+        }*/
+        fieldsPanel.add(cargaHorariaFieldPanel);
         
         JPanel especialidadeFieldPanel = new JPanel();
         JLabel especialidadeLabel = new JLabel("Especialidade:");
@@ -183,7 +205,34 @@ public class CadastroMedicoView extends JPanel {
                     Logger.getLogger(CadastroMedicoView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } 
-            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade, horaInicioField.getText(), horaFimField.getText(), textoIntervaloComboBox);
+            
+            int cont = 0;
+            while (cont <= 2){
+                if (seg.isSelected()){
+                    dias[cont] = "Segunda-feira";
+                    cont++;
+                }
+                if (ter.isSelected()){
+                    dias[cont] = "Terça-feira";
+                    cont++;
+                }
+                if (qua.isSelected()){
+                    dias[cont] = "Quarta-feira";
+                    cont++;
+                }
+                if (qui.isSelected()){
+                    dias[cont] = "Quinta-feira";
+                    cont++;
+                }
+                if (sex.isSelected()){
+                    dias[cont] = "Sexta-feira";
+                    cont++;
+                }
+            }
+            
+            String cargaHoraria = String.join(",", dias);
+            
+            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade, horaInicioField.getText(), horaFimField.getText(), textoIntervaloComboBox, cargaHoraria);
             Router.getInstance().goToView(new MedicosView());
         });
         rodapePanel.add(cadastrarButton);

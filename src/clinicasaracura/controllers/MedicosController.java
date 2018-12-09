@@ -9,12 +9,15 @@ import clinicasaracura.dao.MedicoDAO;
 import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Medico;
 import clinicasaracura.models.Especialidade;
+import clinicasaracura.views.MedicosView;
+import clinicasaracura.views.Router;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +34,7 @@ public class MedicosController {
         this.medicoDAO = new MedicoDAO();
     }
 
-    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade, String horaInicial, String horaFinal, String intervalo) {
+    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade, String horaInicial, String horaFinal, String intervalo, String cargaHoraria) {
         Medico novoMedico = new Medico();
 
         novoMedico.setNome(nome);
@@ -43,13 +46,15 @@ public class MedicosController {
 
         Agenda novaAgenda = new Agenda();
         novoMedico.setAgenda(novaAgenda);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
             this.horaInicio = new Time(sdf.parse(horaInicial).getTime());
             this.horaFim = new Time(sdf.parse(horaFinal).getTime());
             this.tempoIntervalo = new Time(sdf.parse(intervalo).getTime());
         } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null,"O horário deve ser no formato HH:mm.");
         }
+        novaAgenda.setCargaHoraria(cargaHoraria);
         novaAgenda.setHoraInicio(horaInicio);
         novaAgenda.setHoraFim(horaFim);
         novaAgenda.setTempoIntervalo(tempoIntervalo);

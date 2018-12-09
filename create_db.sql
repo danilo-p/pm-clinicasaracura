@@ -5,7 +5,7 @@ USE clinicasaracura;
 DROP TABLE IF EXISTS agendas;
 CREATE TABLE agendas (
   id INT NOT NULL AUTO_INCREMENT,
-  carga_horaria TIME NOT NULL,
+  carga_horaria VARCHAR(255) NOT NULL,
   hora_inicio TIME NOT NULL,
   hora_fim TIME NOT NULL,
   tempo_intervalo TIME NOT NULL,
@@ -106,17 +106,17 @@ INSERT INTO especialidades (nome) VALUES ("Neurologia");
 INSERT INTO especialidades (nome) VALUES ("Pediatria");
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (3, "08:00:00", "07:00:00", "19:00:00", "00:30:00");
+VALUES (3, "08:00:00", "Segunda-feira, Terça-feira, Quarta-feira", "19:00:00", "00:30:00");
 INSERT INTO equipamentos (id, nome, especialidade_id, agenda_id)
 VALUES (1, "Raio X", 1, 3);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (1, "08:00:00", "07:00:00", "19:00:00", "00:30:00");
+VALUES (1, "08:00:00", "Segunda-feira, Terça-feira, Quarta-feira", "19:00:00", "00:30:00");
 INSERT INTO pessoas (id, nome, cpf, telefone, tipo, especialidade_id, agenda_id)
 VALUES (1, "Fulano Medico", "123.456.789-10", "(12) 12345-1234", 1, 1, 1);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (2, "24:00:00", "07:00:00", "22:00:00", "00:30:00");
+VALUES (2, "24:00:00", "Segunda-feira, Terça-feira, Quarta-feira", "22:00:00", "00:30:00");
 INSERT INTO pessoas (id, nome, cpf, telefone, tipo, agenda_id)
 VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 0, 2);
 
