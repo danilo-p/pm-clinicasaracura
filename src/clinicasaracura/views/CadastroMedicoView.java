@@ -47,7 +47,7 @@ public class CadastroMedicoView extends JPanel {
     public CadastroMedicoView() {
         
         this.especialidadeDAO = new EspecialidadeDAO();
-        this.intervalo = new String[]{"00:15:00","00:20:00","00:30:00"};
+        this.intervalo = new String[]{"00:15","00:20","00:30"};
         
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
         this.setLayout(new BorderLayout(5, 5));
@@ -126,10 +126,6 @@ public class CadastroMedicoView extends JPanel {
         cargaHorariaFieldPanel.add(qui);
         sex = new JCheckBox("S");
         cargaHorariaFieldPanel.add(sex);
-        /*for (String dia : dias) {
-            checkbox = new JCheckBox(dia);
-            cargaHorariaFieldPanel.add(checkbox);  
-        }*/
         fieldsPanel.add(cargaHorariaFieldPanel);
         
         JPanel especialidadeFieldPanel = new JPanel();

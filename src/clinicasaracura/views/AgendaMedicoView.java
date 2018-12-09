@@ -14,6 +14,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -40,6 +41,23 @@ public class AgendaMedicoView extends JPanel{
         tituloPanel.add(titulo);
         
         this.add(tituloPanel, BorderLayout.NORTH);
+        
+        //System.out.print(medico.getAgenda().getCargaHoraria());
+        //System.out.print(medico.getAgenda().getTempoIntervalo());
+        
+        String[] dias = medico.getAgenda().getCargaHoraria().split(", ");
+        System.out.print(Arrays.toString(dias));
+        
+        //String[] titulos = {"ID", "Nome", "CPF", "Telefone", "Especialidade"};
+//        Object[][] linhas = new Object[medicos.size()][5];
+//        for (int i = 0; i < medicos.size(); i++) {
+//            Medico medico = (Medico) medicos.get(i);
+//            linhas[i][0] = medico.getId();
+//            linhas[i][1] = medico.getNome();
+//            linhas[i][2] = medico.getCpf();
+//            linhas[i][3] = medico.getTelefone();
+//            linhas[i][4] = medico.getEspecialidade().getNome();
+//        }
         
         //rodape com botao voltar
         JPanel rodapePanel = new JPanel();

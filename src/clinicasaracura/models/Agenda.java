@@ -23,12 +23,12 @@ public class Agenda {
     private Time tempoIntervalo;
 
     public Agenda() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
             //this.cargaHoraria = {"Segunda-feira","Terça-feira","Quarta-feira"};
-            this.horaInicio = new Time(sdf.parse("07:00:00").getTime());
-            this.horaFim = new Time(sdf.parse("19:00:00").getTime());
-            this.tempoIntervalo = new Time(sdf.parse("00:30:00").getTime());
+            this.horaInicio = new Time(sdf.parse("07:00").getTime());
+            this.horaFim = new Time(sdf.parse("19:00").getTime());
+            this.tempoIntervalo = new Time(sdf.parse("00:30").getTime());
         } catch (ParseException ex) {
         }
     }
