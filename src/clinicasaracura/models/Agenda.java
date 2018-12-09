@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 public class Agenda {
 
     private int id;
-    private Time cargaHoraria;
+    private String cargaHoraria;
     private Time horaInicio;
     private Time horaFim;
     private Time tempoIntervalo;
@@ -25,7 +25,7 @@ public class Agenda {
     public Agenda() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         try {
-            this.cargaHoraria = new Time(sdf.parse("08:00:00").getTime());
+            //this.cargaHoraria = {"Segunda-feira","Terça-feira","Quarta-feira"};
             this.horaInicio = new Time(sdf.parse("07:00:00").getTime());
             this.horaFim = new Time(sdf.parse("19:00:00").getTime());
             this.tempoIntervalo = new Time(sdf.parse("00:30:00").getTime());
@@ -33,7 +33,7 @@ public class Agenda {
         }
     }
 
-    public Agenda(Time cargaHoraria, Time horaInicio, Time horaFim, Time tempoIntervalo) {
+    public Agenda(String cargaHoraria, Time horaInicio, Time horaFim, Time tempoIntervalo) {
         this.cargaHoraria = cargaHoraria;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
@@ -48,11 +48,11 @@ public class Agenda {
         this.id = id;
     }
 
-    public Time getCargaHoraria() {
+    public String getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCargaHoraria(Time cargaHoraria) {
+    public void setCargaHoraria(String cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
