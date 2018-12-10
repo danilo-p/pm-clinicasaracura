@@ -114,43 +114,4 @@ public class MedicoDAO extends GenericDAO{
         return medico;
     }
     
-    public List findByIdList(int id) throws SQLException {
-        List pessoas = new ArrayList();
-
-        String select = "SELECT * FROM pessoas WHERE id = ? AND tipo = 1";
-
-        Connection connection = getConnection();
-        
-        PreparedStatement stmt = connection.prepareStatement(select);
-
-        stmt.setInt(1, id);
-                
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            Medico medico = new Medico();
-
-            medico.setId(rs.getInt("id"));
-            medico.setNome(rs.getString("nome"));
-            medico.setCpf(rs.getString("cpf"));
-            medico.setTelefone(rs.getString("telefone"));
-            medico.setTipo(rs.getInt("tipo"));
-            
-            int especialidadeId = rs.getInt("especialidade_id");
-            Especialidade especialidade = this.especialidadeDAO.findById(especialidadeId);
-            medico.setEspecialidade(especialidade);
-
-            int agendaId = rs.getInt("agenda_id");
-            Agenda agenda = this.agendaDAO.findById(agendaId);
-            medico.setAgenda(agenda);
-
-            pessoas.add(medico);
-        }
-
-        rs.close();
-        stmt.close();
-        connection.close();
-
-        return pessoas;
-    }
 }
