@@ -50,7 +50,7 @@ public class AgendaDAO extends GenericDAO {
             agenda.setCargaHoraria(rs.getString("carga_horaria"));
             agenda.setHoraInicio(rs.getTime("hora_inicio"));
             agenda.setHoraFim(rs.getTime("hora_fim"));
-            agenda.setTempoIntervalo(rs.getTime("tempo_intervalo"));
+            agenda.setTempoIntervalo(rs.getInt("tempo_intervalo"));
         }
 
         rs.close();

@@ -20,7 +20,7 @@ public class Agenda {
     private String cargaHoraria;
     private Time horaInicio;
     private Time horaFim;
-    private Time tempoIntervalo;
+    private int tempoIntervalo;
 
     public Agenda() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -28,12 +28,11 @@ public class Agenda {
             //this.cargaHoraria = {"Segunda-feira","Terça-feira","Quarta-feira"};
             this.horaInicio = new Time(sdf.parse("07:00").getTime());
             this.horaFim = new Time(sdf.parse("19:00").getTime());
-            this.tempoIntervalo = new Time(sdf.parse("00:30").getTime());
         } catch (ParseException ex) {
         }
     }
 
-    public Agenda(String cargaHoraria, Time horaInicio, Time horaFim, Time tempoIntervalo) {
+    public Agenda(String cargaHoraria, Time horaInicio, Time horaFim, int tempoIntervalo) {
         this.cargaHoraria = cargaHoraria;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
@@ -72,11 +71,11 @@ public class Agenda {
         this.horaFim = horaFim;
     }
 
-    public Time getTempoIntervalo() {
+    public int getTempoIntervalo() {
         return tempoIntervalo;
     }
 
-    public void setTempoIntervalo(Time tempoIntervalo) {
+    public void setTempoIntervalo(int tempoIntervalo) {
         this.tempoIntervalo = tempoIntervalo;
     }
 
