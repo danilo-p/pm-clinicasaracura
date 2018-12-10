@@ -22,6 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.text.ParseException;
 
 /**
  *
@@ -42,22 +46,70 @@ public class AgendaMedicoView extends JPanel{
         
         this.add(tituloPanel, BorderLayout.NORTH);
         
-        //System.out.print(medico.getAgenda().getCargaHoraria());
-        //System.out.print(medico.getAgenda().getTempoIntervalo());
+        String aux = "Horário,";
+        aux = aux.concat(medico.getAgenda().getCargaHoraria());
+        String[] titulos = aux.split(",");
         
-        String[] dias = medico.getAgenda().getCargaHoraria().split(", ");
-        System.out.print(Arrays.toString(dias));
-        
-        //String[] titulos = {"ID", "Nome", "CPF", "Telefone", "Especialidade"};
-//        Object[][] linhas = new Object[medicos.size()][5];
-//        for (int i = 0; i < medicos.size(); i++) {
-//            Medico medico = (Medico) medicos.get(i);
-//            linhas[i][0] = medico.getId();
-//            linhas[i][1] = medico.getNome();
-//            linhas[i][2] = medico.getCpf();
-//            linhas[i][3] = medico.getTelefone();
-//            linhas[i][4] = medico.getEspecialidade().getNome();
-//        }
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        Time quinze;
+        Time vinte;
+        Time trinta;
+        try {
+            quinze = new Time(sdf.parse("00:15:00").getTime());
+            vinte = new Time(sdf.parse("00:20:00").getTime());
+            trinta = new Time(sdf.parse("00:30:00").getTime());
+            
+            int n_linhas;
+            int i;
+            i = quinze.compareTo(medico.getAgenda().getTempoIntervalo());
+            if (i == 0){
+                n_linhas = (60/15)*6;
+                Object [][] dados = new Object[n_linhas][4];
+                dados [0][0] = medico.getAgenda().getHoraInicio();
+                for (int j = 1; j < n_linhas; j++){
+                    dados[j][0] = new Time(medico.getAgenda().getHoraInicio().getTime() + 15*j * 60 * 1000);
+                }
+                JTable medicosTable = new JTable(dados, titulos);
+                medicosTable.setDefaultEditor(Object.class, null);
+                JScrollPane scrollPane = new JScrollPane(medicosTable);
+                medicosTable.setFillsViewportHeight(true);
+                this.add(scrollPane, BorderLayout.CENTER);
+            }
+            else {
+                i = vinte.compareTo(medico.getAgenda().getTempoIntervalo());
+                if (i == 0){
+                    n_linhas = (60/20)*6;
+                    Object [][] dados = new Object[n_linhas][4];
+                    dados [0][0] = medico.getAgenda().getHoraInicio();
+                    for (int j = 1; j < n_linhas; j++){
+                        dados[j][0] = new Time(medico.getAgenda().getHoraInicio().getTime() + 20*j * 60 * 1000);
+                    }
+                    JTable medicosTable = new JTable(dados, titulos);
+                    medicosTable.setDefaultEditor(Object.class, null);
+                    JScrollPane scrollPane = new JScrollPane(medicosTable);
+                    medicosTable.setFillsViewportHeight(true);
+                    this.add(scrollPane, BorderLayout.CENTER);
+                }
+                else {
+                    i = trinta.compareTo(medico.getAgenda().getTempoIntervalo());
+                    if (i == 0){
+                        n_linhas = (60/30)*6;
+                        Object [][] dados = new Object[n_linhas][4];
+                        dados [0][0] = medico.getAgenda().getHoraInicio();
+                        for (int j = 1; j < n_linhas; j++){
+                            dados[j][0] = new Time(medico.getAgenda().getHoraInicio().getTime() + 30*j * 60 * 1000);
+                        }
+                        JTable medicosTable = new JTable(dados, titulos);
+                        medicosTable.setDefaultEditor(Object.class, null);
+                        JScrollPane scrollPane = new JScrollPane(medicosTable);
+                        medicosTable.setFillsViewportHeight(true);
+                        this.add(scrollPane, BorderLayout.CENTER);
+                    }
+                }
+            }
+        } 
+        catch (ParseException ex) {
+        }
         
         //rodape com botao voltar
         JPanel rodapePanel = new JPanel();
