@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.sql.Time;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
@@ -47,7 +48,7 @@ public class CadastroMedicoView extends JPanel {
     public CadastroMedicoView() {
         
         this.especialidadeDAO = new EspecialidadeDAO();
-        this.intervalo = new String[]{"00:15","00:20","00:30"};
+        this.intervalo = new String[]{"15","20","30"};
         
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
         this.setLayout(new BorderLayout(5, 5));
@@ -90,14 +91,6 @@ public class CadastroMedicoView extends JPanel {
         horaInicioField.setColumns(5);
         horaInicioFieldPanel.add(horaInicioField);
         fieldsPanel.add(horaInicioFieldPanel);
-        
-        JPanel horaFimFieldPanel = new JPanel();
-        JLabel horaFimLabel = new JLabel("Hora fim:");
-        horaFimFieldPanel.add(horaFimLabel);
-        JTextField horaFimField = new JTextField(1);
-        horaFimField.setColumns(5);
-        horaFimFieldPanel.add(horaFimField);
-        fieldsPanel.add(horaFimFieldPanel);
         
         JPanel intervaloFieldPanel = new JPanel();
         JLabel intervaloLabel = new JLabel("Tempo intervalo:");
@@ -228,7 +221,9 @@ public class CadastroMedicoView extends JPanel {
             
             String cargaHoraria = String.join(",", dias);
             
-            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade, horaInicioField.getText(), horaFimField.getText(), textoIntervaloComboBox, cargaHoraria);
+            int intervalo = Integer.parseInt(textoIntervaloComboBox);
+            
+            medicosController.criarMedico(nomeField.getText(), cpfField.getText(), telefoneField.getText(), especialidade, horaInicioField.getText(), intervalo, cargaHoraria);
             Router.getInstance().goToView(new MedicosView());
         });
         rodapePanel.add(cadastrarButton);

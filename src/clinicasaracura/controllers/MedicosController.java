@@ -34,7 +34,7 @@ public class MedicosController {
         this.medicoDAO = new MedicoDAO();
     }
 
-    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade, String horaInicial, String horaFinal, String intervalo, String cargaHoraria) {
+    public void criarMedico(String nome, String cpf, String telefone, Especialidade especialidade, String horaInicial, int intervalo, String cargaHoraria) {
         Medico novoMedico = new Medico();
 
         novoMedico.setNome(nome);
@@ -49,15 +49,15 @@ public class MedicosController {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
             this.horaInicio = new Time(sdf.parse(horaInicial).getTime());
-            this.horaFim = new Time(sdf.parse(horaFinal).getTime());
-            this.tempoIntervalo = new Time(sdf.parse(intervalo).getTime());
+            this.horaFim = new Time(sdf.parse(horaInicial).getTime() + 360 * 60 * 1000); //somar 6 horas ao horario de inicio
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null,"O horário deve ser no formato HH:mm.");
+            return;
         }
         novaAgenda.setCargaHoraria(cargaHoraria);
         novaAgenda.setHoraInicio(horaInicio);
         novaAgenda.setHoraFim(horaFim);
-        novaAgenda.setTempoIntervalo(tempoIntervalo);
+        novaAgenda.setTempoIntervalo(intervalo);
 
         try {
             this.medicoDAO.salvarMedico(novoMedico);
