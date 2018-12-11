@@ -2,12 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
         <group>
 <<<<<<< Updated upstream
+=======
+        <group>
+>>>>>>> master
             <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Agenda.java</file>
             <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/dao/EspecialidadeDAO.java</file>
             <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Agendavel.java</file>
             <file>file:/home/vien/Codes/pm-clinicasaracura/src/clinicasaracura/models/Especialidade.java</file>
+<<<<<<< HEAD
 =======
             <file>file:/home/ana/Desktop/pm-clinicasaracura/src/clinicasaracura/controllers/MedicosController.java</file>
             <file>file:/home/ana/Desktop/pm-clinicasaracura/src/clinicasaracura/models/Agenda.java</file>
@@ -16,5 +25,14 @@
             <file>file:/home/ana/Desktop/pm-clinicasaracura/src/clinicasaracura/views/AgendaMedicoView.java</file>
 >>>>>>> Stashed changes
         </group>
+<<<<<<< HEAD
+=======
+=======
+        <group/>
+>>>>>>> master
+=======
+        </group>
+>>>>>>> master
+>>>>>>> master
     </open-files>
 </project-private>
