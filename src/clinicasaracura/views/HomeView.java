@@ -33,12 +33,8 @@ public class HomeView extends JPanel {
             Router.getInstance().goToView(new ClientesView());
         });
         this.add(clientesButton);
-        
-        JButton novaConsultaButton = new JButton("Nova Consulta");
-        novaConsultaButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new CadastroConsultaView());
-        });
-        this.add(novaConsultaButton);
+
+        this.add(new JButton("Nova Consulta"));
 
         this.add(new JButton("Novo Exame"));
     }
