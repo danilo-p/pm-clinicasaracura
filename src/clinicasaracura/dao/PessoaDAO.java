@@ -26,7 +26,7 @@ public class PessoaDAO extends GenericDAO {
 
     public void salvar(Pessoa pessoa) throws SQLException {
         Agenda agenda = pessoa.getAgenda();
-        this.agendaDAO.salvar(agenda);
+        //this.agendaDAO.salvar(agenda);
         String insert = "INSERT INTO pessoas(nome, cpf, telefone, tipo, agenda_id) VALUES(?,?,?,?,?)";
         int id = save(insert, pessoa.getNome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getTipo(), agenda.getId());
         if (id > 0) {

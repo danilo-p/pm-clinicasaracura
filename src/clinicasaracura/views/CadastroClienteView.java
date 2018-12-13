@@ -72,7 +72,7 @@ public class CadastroClienteView extends JPanel {
         rodapePanel.add(voltarButton);
 
         ClientesController clientesController = new ClientesController();
-        JButton cadastrarButton = new JButton("Novo");
+        JButton cadastrarButton = new JButton("Confirmar");
         cadastrarButton.addActionListener((ActionEvent e) -> {
             clientesController.criarCliente(nomeField.getText(), cpfField.getText(), telefoneField.getText());
             Router.getInstance().goToView(new ClientesView());

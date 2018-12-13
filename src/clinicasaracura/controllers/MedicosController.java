@@ -76,4 +76,14 @@ public class MedicosController {
             return new ArrayList<>();
         }
     }
+	
+    public List getMedicosByEspecialidadeId(int id) {
+        try {
+            return this.medicoDAO.findMedicosByEspecialidadeId(id);
+        } catch (SQLException ex) {
+            System.out.println("MedicosController: Falha ao recuperar medicos.");
+            System.out.println(ex);
+            return new ArrayList<>();
+        }
+    }
 }
