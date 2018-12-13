@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,12 +24,17 @@ import javax.swing.border.EmptyBorder;
  *
  * @author Bernardo Senna
  */
-public class ConsultaEspecialidadesView extends JPanel{
+public class ConsultaMedicosByEspecialidadesView extends JPanel{
     
-    public ConsultaEspecialidadesView(int id){
+    public ConsultaMedicosByEspecialidadesView(int id){
         
         this.setBorder(new EmptyBorder(15, 15, 15, 15));
         this.setLayout(new BorderLayout(15, 15));
+        
+        JPanel tituloFieldPanel = new JPanel();        
+        JLabel tituloLabel = new JLabel("Selecione o médico:");
+        tituloFieldPanel.add(tituloLabel);
+        this.add(tituloFieldPanel, BorderLayout.NORTH);
         
         MedicosController medicosController = new MedicosController();
         List medicos = medicosController.getMedicosByEspecialidadeId(id);
@@ -43,7 +49,6 @@ public class ConsultaEspecialidadesView extends JPanel{
             linhas[i][3] = medico.getTelefone();
             linhas[i][4] = medico.getEspecialidade().getNome();
         }
-        
       
         JTable medicosTable = new JTable(linhas, titulos);
         medicosTable.setDefaultEditor(Object.class, null);

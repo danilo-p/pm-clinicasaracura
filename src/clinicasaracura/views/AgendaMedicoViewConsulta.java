@@ -6,6 +6,7 @@
 package clinicasaracura.views;
 
 import clinicasaracura.controllers.MedicosController;
+import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Medico;
 import clinicasaracura.models.Pessoa;
 import java.awt.BorderLayout;
@@ -60,6 +61,19 @@ public class AgendaMedicoViewConsulta extends JPanel{
         }
         JTable medicosTable = new JTable(dados, titulos);
         medicosTable.setDefaultEditor(Object.class, null);
+        medicosTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    //Aqui iremos chamar a tela pra confirmar a consulta...(comando abaixo)
+                    Router.getInstance().goToView(new ConfirmaConsultaView(medico));
+                }
+            }
+        });
+        
         JScrollPane scrollPane = new JScrollPane(medicosTable);
         medicosTable.setFillsViewportHeight(true);
         this.add(scrollPane, BorderLayout.CENTER);
@@ -69,7 +83,7 @@ public class AgendaMedicoViewConsulta extends JPanel{
         rodapePanel.setLayout(new GridLayout(1, 2, 0, 0));
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new ConsultaEspecialidadesView(medico.getEspecialidade().getId()));
+            Router.getInstance().goToView(new ConsultaMedicosByEspecialidadesView(medico.getEspecialidade().getId()));
         });
         rodapePanel.add(voltarButton);
         this.add(rodapePanel, BorderLayout.SOUTH);

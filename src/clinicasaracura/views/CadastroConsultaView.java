@@ -91,7 +91,7 @@ import javax.swing.JFrame;
         
         JButton BuscarButton = new JButton("Buscar");
         BuscarButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new ConsultaEspecialidadesView(especialidadeId));
+            Router.getInstance().goToView(new ConsultaMedicosByEspecialidadesView(especialidadeId));
         });
         botoesFieldPanel.add(BuscarButton);
         
