@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/views/MedicosView.java</file>
-            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/ClinicaSaraCura.java</file>
-            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/views/AgendaMedicoView.java</file>
-            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/models/Medico.java</file>
-            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/controllers/MedicosController.java</file>
+            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/dao/MedicoDAO.java</file>
+            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/dao/EquipamentoDAO.java</file>
+            <file>file:/C:/Users/T-Gamer/Documents/NetBeansProjects/pm-clinicasaracura/src/clinicasaracura/models/Equipamento.java</file>
         </group>
     </open-files>
 </project-private>
