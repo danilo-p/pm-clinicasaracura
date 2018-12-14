@@ -37,7 +37,6 @@ DROP TABLE IF EXISTS consultas;
 CREATE TABLE consultas (
   id INT NOT NULL AUTO_INCREMENT,
   data DATETIME NOT NULL,
-  duracao TIME NOT NULL DEFAULT "01:00:00",
   medico_id INT NOT NULL,
   cliente_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -70,28 +69,13 @@ DROP TABLE IF EXISTS pagamentos;
 CREATE TABLE pagamentos (
   id INT NOT NULL AUTO_INCREMENT,
   valor INT NOT NULL,
+  tipo INT NOT NULL,
+  metodo INT,
+  convenio VARCHAR(255),
+  matricula VARCHAR(255),
   consulta_id INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (consulta_id) REFERENCES consultas(id)
-);
-
-DROP TABLE IF EXISTS pagamentos_convenio;
-CREATE TABLE pagamentos_convenio (
-  id INT NOT NULL AUTO_INCREMENT,
-  pagamento_id INT NOT NULL,
-  convenio VARCHAR(255) NOT NULL,
-  matricula VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (pagamento_id) REFERENCES pagamentos(id)
-);
-
-DROP TABLE IF EXISTS pagamentos_particular;
-CREATE TABLE pagamentos_particular (
-  id INT NOT NULL AUTO_INCREMENT,
-  pagamento_id INT NOT NULL,
-  metodo INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (pagamento_id) REFERENCES pagamentos(id)
 );
 
 INSERT INTO especialidades (nome) VALUES ("Traumatologia");
@@ -125,14 +109,10 @@ INSERT INTO consultas (id, data, medico_id, cliente_id)
 VALUES (1, "2018-01-01 12:00:00", 1, 2);
 INSERT INTO exames (id, consulta_id, equipamento_id)
 VALUES (1, 1, 1);
-INSERT INTO pagamentos (id, valor, consulta_id)
-VALUES (1, 10000, 1);
-INSERT INTO pagamentos_convenio (id, pagamento_id, convenio, matricula)
-VALUES (1, 1, "Unimed", "12345-6");
+INSERT INTO pagamentos (id, valor, tipo, convenio, matricula, consulta_id)
+VALUES (1, 10000, 1, 'UNIMED', '0000000001', 1);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
 VALUES (2, "2018-01-01 15:00:00", 1, 2);
-INSERT INTO pagamentos (id, valor, consulta_id)
-VALUES (2, 10000, 2);
-INSERT INTO pagamentos_particular (id, pagamento_id, metodo)
-VALUES (2, 2, 0);
+INSERT INTO pagamentos (id, valor, tipo, metodo, consulta_id)
+VALUES (2, 10000, 0, 0, 2);

@@ -69,7 +69,7 @@ public class AgendaMedicoViewConsulta extends JPanel{
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     //Aqui iremos chamar a tela pra confirmar a consulta...(comando abaixo)
-                    Router.getInstance().goToView(new ConfirmaConsultaView(medico));
+                    Router.getInstance().goToView(new ConfirmaConsultaView(medico, "2018-12-10 12:00:00"));
                 }
             }
         });

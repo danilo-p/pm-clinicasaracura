@@ -5,37 +5,16 @@
  */
 package clinicasaracura.views;
 
-import clinicasaracura.controllers.MedicosController;
 import clinicasaracura.controllers.EspecialidadesController;
-import clinicasaracura.models.Medico;
-import clinicasaracura.models.Pessoa;
 import clinicasaracura.models.Especialidade;
-import clinicasaracura.dao.EspecialidadeDAO;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import static java.awt.Component.CENTER_ALIGNMENT;
-import java.awt.FlowLayout;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import java.sql.Time;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 
 
 /**

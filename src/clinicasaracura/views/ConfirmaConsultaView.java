@@ -24,7 +24,7 @@ import javax.swing.JPanel;
  */
 public class ConfirmaConsultaView extends JPanel{
     
-    public ConfirmaConsultaView(Medico medico){
+    public ConfirmaConsultaView(Medico medico, String dataHoraConsulta){
           
 	JPanel clienteFieldPanel = new JPanel();        
         JLabel ClienteLabel = new JLabel("Selecione o cliente:");
@@ -50,8 +50,10 @@ public class ConfirmaConsultaView extends JPanel{
         pagamentoComboBox.addItem("Convenio");
         this.add(pagamentoFieldPanel, BorderLayout.CENTER);
         
-        //Testar se convenio ou particular, e então exibir em outro ComboBox as opções respectivas.
-        //Precisamos inserir seu nome e telefone na tela de agenda do medico (Use o nome do cliente selecionado no comboBox)
+        //metodo pra buscar id cliente para cadastrar no banco de dados
+        //finalizar cadastro da consulta com pagamentos
+        //exibir dados na tela fica por conta do Danilo
+        
         
         //RODAPÉ....
         JPanel botoesFieldPanel = new JPanel();
