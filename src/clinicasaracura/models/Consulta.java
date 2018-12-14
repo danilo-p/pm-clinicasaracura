@@ -17,15 +17,13 @@ public class Consulta {
 
     private int id;
     private Date data;
-    private Time duracao;
     private Medico medico;
     private Cliente cliente;
     
     public Consulta() {}
     
-    public Consulta(Date data, Time duracao, Medico medico, Cliente cliente) {
+    public Consulta(Date data, Medico medico, Cliente cliente) {
         this.data = data;
-        this.duracao = duracao;
         this.medico = medico;
         this.cliente = cliente;
     }
@@ -44,14 +42,6 @@ public class Consulta {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public Time getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(Time duracao) {
-        this.duracao = duracao;
     }
 
     public Medico getMedico() {

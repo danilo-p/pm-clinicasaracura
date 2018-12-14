@@ -53,17 +53,16 @@ public class ConsultaDAO extends GenericDAO {
 
     public void salvar(Consulta consulta) throws SQLException {
         
-        String insert = "INSERT INTO consultas(data, duracao, medico_id, cliente_id) VALUES(?, ?, ?, ?)";
-        int id = save(insert, consulta.getData(), consulta.getDuracao(),
-            consulta.getMedico().getId(), consulta.getCliente().getId());
+        String insert = "INSERT INTO consultas(data, medico_id, cliente_id) VALUES(?, ?, ?)";
+        int id = save(insert, consulta.getData(), consulta.getMedico().getId(), consulta.getCliente().getId());
         if (id > 0) {
             consulta.setId(id);
         }
     }
     
     public void alterar(Consulta consulta) throws SQLException {
-        String update = "UPDATE consultas SET data = ?, duracao = ?, medico_id = ?, cliente_id = ? WHERE id = ?";
-        update(update, consulta.getData(), consulta.getDuracao(),
+        String update = "UPDATE consultas SET data = ?, medico_id = ?, cliente_id = ? WHERE id = ?";
+        update(update, consulta.getData(),
             consulta.getMedico().getId(), consulta.getCliente().getId());
     }
 
@@ -81,7 +80,6 @@ public class ConsultaDAO extends GenericDAO {
             Consulta consulta = new Consulta();
             consulta.setId(rs.getInt("id"));
             consulta.setData(rs.getDate("data"));
-            consulta.setDuracao(rs.getTime("duracao"));
             consulta.setCliente(cliente);
 
             int medicoId = rs.getInt("medico_id");
@@ -112,7 +110,6 @@ public class ConsultaDAO extends GenericDAO {
             Consulta consulta = new Consulta();
             consulta.setId(rs.getInt("id"));
             consulta.setData(rs.getDate("data"));
-            consulta.setDuracao(rs.getTime("duracao"));
             consulta.setMedico(medico);
 
             int clienteId = rs.getInt("cliente_id");

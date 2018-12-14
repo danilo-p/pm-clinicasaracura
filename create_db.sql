@@ -70,7 +70,7 @@ CREATE TABLE pagamentos (
   id INT NOT NULL AUTO_INCREMENT,
   valor INT NOT NULL,
   tipo INT NOT NULL,
-  metodo INT,
+  metodo VARCHAR(255),
   convenio VARCHAR(255),
   matricula VARCHAR(255),
   consulta_id INT NOT NULL,
@@ -106,13 +106,13 @@ INSERT INTO pessoas (id, nome, cpf, telefone, tipo, agenda_id)
 VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 0, 2);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
-VALUES (1, "2018-01-01 12:00:00", 1, 2);
+VALUES (1, '2018-01-01 12:00:00', 1, 2);
 INSERT INTO exames (id, consulta_id, equipamento_id)
 VALUES (1, 1, 1);
 INSERT INTO pagamentos (id, valor, tipo, convenio, matricula, consulta_id)
 VALUES (1, 10000, 1, 'UNIMED', '0000000001', 1);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
-VALUES (2, "2018-01-01 15:00:00", 1, 2);
+VALUES (2, '2018-01-01 15:00:00', 1, 2);
 INSERT INTO pagamentos (id, valor, tipo, metodo, consulta_id)
-VALUES (2, 10000, 0, 0, 2);
+VALUES (2, 10000, 0, 'Dinheiro', 2);

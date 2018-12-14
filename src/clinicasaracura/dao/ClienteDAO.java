@@ -98,4 +98,34 @@ public class ClienteDAO extends GenericDAO {
 
         return cliente;
     }
+    
+     public Cliente findByName(String nome) throws SQLException {
+        String select = "SELECT * FROM pessoas WHERE nome = ? AND tipo = 0";
+        Cliente cliente = null;
+        Connection connection = getConnection();
+        PreparedStatement stmt = connection.prepareStatement(select);
+
+        stmt.setString(1, nome);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            cliente = new Cliente();
+
+            cliente.setId(rs.getInt("id"));
+            cliente.setNome(rs.getString("nome"));
+            cliente.setCpf(rs.getString("cpf"));
+            cliente.setTelefone(rs.getString("telefone"));
+            cliente.setTipo(rs.getInt("tipo"));
+            
+            int agendaId = rs.getInt("agenda_id");
+            Agenda agenda = this.agendaDAO.findById(agendaId);
+            cliente.setAgenda(agenda);
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return cliente;
+    }
 }

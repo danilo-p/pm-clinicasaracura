@@ -10,19 +10,25 @@ import clinicasaracura.controllers.PagamentosController;
 import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Medico;
 import java.awt.BorderLayout;
-import static java.awt.Component.CENTER_ALIGNMENT;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Bernardo Senna
  */
 public class ConfirmaConsultaView extends JPanel{
+    
+    Cliente cliente;
+    String textoClienteComboBox, textoPagamentoComboBox, textoMatriculaConveniado;
+    int tipoPagamento;
+    private JTextField matriculaField, valorField;
     
     public ConfirmaConsultaView(Medico medico, String dataHoraConsulta){
           
@@ -40,20 +46,96 @@ public class ConfirmaConsultaView extends JPanel{
         }
         this.add(clienteFieldPanel, BorderLayout.NORTH);
         
-        JPanel pagamentoFieldPanel = new JPanel();        
-        JLabel PagamentoLabel = new JLabel("Selecione a forma de pagamento:");
-        pagamentoFieldPanel.add(PagamentoLabel);
+        
+        //PEGA TEXTO DO COMBOBOX DE CLIENTES E GERA UMA VARIAVEL COM OS DADOS DAQUELE CLIENTE.
+        clienteComboBox.addActionListener((ActionEvent e) -> {
+            
+            textoClienteComboBox = (String) clienteComboBox.getSelectedItem();
+            
+            cliente = clientesController.getClienteByName(textoClienteComboBox);
+            //DANILO: acima está a variavel "cliente" para ser colocada na agenda do medico (pegar nome e telefone)
+            
+        });
+        
+        
+        JPanel tipoFieldPanel = new JPanel();
+        JLabel PagamentoLabel = new JLabel("Selecione o tipo de pagamento:");
+        tipoFieldPanel.add(PagamentoLabel);
+        JComboBox<String> tipoPagamentoComboBox = new JComboBox<String>();
+        tipoFieldPanel.add(tipoPagamentoComboBox);
+        
+        this.add(tipoFieldPanel, BorderLayout.CENTER);
+        
+        tipoPagamentoComboBox.addItem("Particular");
+        tipoPagamentoComboBox.addItem("Convenio");
+        
+        JPanel escolhaFieldPanel = new JPanel();
+        JLabel PagamentoLabel2 = new JLabel("Selecione a forma de pagamento/convenio:");
+        escolhaFieldPanel.add(PagamentoLabel2);
         JComboBox<String> pagamentoComboBox = new JComboBox<String>();
-        pagamentoFieldPanel.add(pagamentoComboBox);
+        pagamentoComboBox.setEnabled(false);
+        escolhaFieldPanel.add(pagamentoComboBox);
         
-        pagamentoComboBox.addItem("Particular");
-        pagamentoComboBox.addItem("Convenio");
-        this.add(pagamentoFieldPanel, BorderLayout.CENTER);
+        this.add(escolhaFieldPanel, BorderLayout.CENTER);
         
-        //metodo pra buscar id cliente para cadastrar no banco de dados
-        //finalizar cadastro da consulta com pagamentos
-        //exibir dados na tela fica por conta do Danilo
+        JPanel matriculaFieldPanel = new JPanel();
+        JLabel matriculaLabel = new JLabel("Digite a matricula do conveniado:");
+        matriculaFieldPanel.add(matriculaLabel);
+        matriculaField = new JTextField(1);
+        matriculaField.setColumns(21);
+        matriculaField.setEnabled(false);
+        matriculaField.setBackground(Color.LIGHT_GRAY);
+        matriculaFieldPanel.add(matriculaField);
         
+        this.add(matriculaFieldPanel, BorderLayout.CENTER);
+        
+        JPanel valorFieldPanel = new JPanel();
+        JLabel valorLabel = new JLabel("Valor (R$):");
+        valorFieldPanel.add(valorLabel);
+        valorField = new JTextField(1);
+        valorField.setColumns(21);
+        valorFieldPanel.add(valorField);
+        
+        this.add(valorFieldPanel, BorderLayout.CENTER);
+        
+        
+        //PEGA TEXTO DO COMBOBOX DE TIPOS DE PAGAMENTO E MONTA UM COMBOBOX COM AS OPCOES RESPECTIVAS.
+        tipoPagamentoComboBox.addActionListener((ActionEvent e) -> {
+            
+            textoPagamentoComboBox = (String) tipoPagamentoComboBox.getSelectedItem();
+            
+            if( "Particular".equals(textoPagamentoComboBox)){
+                pagamentoComboBox.setEnabled(true);  
+                pagamentoComboBox.removeAllItems();
+                pagamentoComboBox.addItem("Cartao Credito");              
+                pagamentoComboBox.addItem("Cartao Debito");
+                pagamentoComboBox.addItem("Cheque");
+                pagamentoComboBox.addItem("Dinheiro");
+                
+                matriculaField.setEnabled(false);
+                matriculaField.setBackground(Color.LIGHT_GRAY);
+                
+                tipoPagamento = 0;//pagamento por particular
+            }
+            else if( "Convenio".equals(textoPagamentoComboBox)){
+                pagamentoComboBox.setEnabled(true);
+                pagamentoComboBox.removeAllItems();
+                pagamentoComboBox.addItem("Amil");
+                pagamentoComboBox.addItem("Bradesco");
+                pagamentoComboBox.addItem("Golden Cross");
+                pagamentoComboBox.addItem("Promed");
+                pagamentoComboBox.addItem("Unimed");
+                
+                matriculaField.setEnabled(true);
+                matriculaField.setBackground(Color.WHITE);
+                
+                tipoPagamento = 1;//pagamento por convenio
+            }
+            else{
+                pagamentoComboBox.setEnabled(false);
+            }
+        });
+
         
         //RODAPÉ....
         JPanel botoesFieldPanel = new JPanel();
@@ -65,7 +147,29 @@ public class ConfirmaConsultaView extends JPanel{
         
         JButton BuscarButton = new JButton("Confirmar");
         BuscarButton.addActionListener((ActionEvent e) -> {
-            //insere no banco de dados os detalhes da consulta e retorna à tela principal
+           /* 
+            ConsultasController consultasController = new ConsultasController();
+
+            consultasController.criarConsulta(dataHoraConsulta, medico, cliente);
+            
+            //DANILO: favor converter String para data, para poder salvar no banco de dados
+           */ 
+            PagamentosController pagamentosController = new PagamentosController();
+            
+            int valor = Integer.parseInt(valorField.getText());
+            String pagamento = (String) pagamentoComboBox.getSelectedItem();
+            textoMatriculaConveniado = (String) matriculaField.getText();
+            
+            if(tipoPagamento == 0){
+                
+                pagamentosController.criarPagamentoParticular(valor, tipoPagamento, pagamento, 1);//o ultimo parametro deve ser trocado pelo id da consulta a ser inserida
+            }
+            else{
+                
+                pagamentosController.criarPagamentoConvenio(valor, tipoPagamento, pagamento, textoMatriculaConveniado, 1);//o ultimo parametro deve ser trocado pelo id da consulta a ser inserida
+            }
+            
+            
             Router.getInstance().goToView(new HomeView());
         });
         botoesFieldPanel.add(BuscarButton);

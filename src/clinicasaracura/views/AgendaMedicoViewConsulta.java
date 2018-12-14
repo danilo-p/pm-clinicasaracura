@@ -25,7 +25,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 
 /**
@@ -68,8 +68,9 @@ public class AgendaMedicoViewConsulta extends JPanel{
                 Point point = mouseEvent.getPoint();
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    
                     //Aqui iremos chamar a tela pra confirmar a consulta...(comando abaixo)
-                    Router.getInstance().goToView(new ConfirmaConsultaView(medico, "2018-12-10 12:00:00"));
+                    Router.getInstance().goToView(new ConfirmaConsultaView(medico, "2018-01-01 15:00:00"));
                 }
             }
         });
