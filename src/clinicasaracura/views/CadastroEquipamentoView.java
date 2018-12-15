@@ -122,7 +122,7 @@ public class CadastroEquipamentoView extends JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(CadastroMedicoView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
         rodapePanel.add(cadastrarButton);
 
@@ -148,16 +148,11 @@ public class CadastroEquipamentoView extends JPanel {
     private boolean validateEspecialidadeComboBox() {
         String especialidade = (String) this.especialidadeComboBox.getSelectedItem();
 
-        System.out.println("askdhfjaldskfj 2 " + especialidade);
-
         if(especialidade.length() == 0) {
             this.especialidadeError.setText("Selecione a especialidade do médico");
             this.especialidadeError.setVisible(true);
-            System.out.println("askdhfjaldskfj 3");
             return false;
         }
-
-        System.out.println("askdhfjaldskfj 5");
 
         this.especialidadeError.setVisible(false);
         return true;
