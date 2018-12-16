@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,6 +44,16 @@ public class ConsultasController {
         }
 
         return null;
+    }
+    
+    public List getByMedico(Medico medico, Timestamp inicio, Timestamp fim) {
+        try {
+            return this.consultaDAO.findByMedico(medico, inicio, fim);
+        } catch (SQLException ex) {
+            System.out.println("MedicosController: Falha ao recuperar medicos.");
+            System.out.println(ex);
+            return new ArrayList<>();
+        }
     }
     
 }

@@ -90,29 +90,28 @@ INSERT INTO especialidades (nome) VALUES ("Neurologia");
 INSERT INTO especialidades (nome) VALUES ("Pediatria");
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (3, "Segunda-feira, Terça-feira, Quarta-feira", "08:00", "14:00", 30);
+VALUES (3, "1,2,3", "08:00", "14:00", 30);
 INSERT INTO equipamentos (id, nome, especialidade_id, agenda_id)
 VALUES (1, "Raio X", 1, 3);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (1, "Segunda-feira, Terça-feira, Quarta-feira", "08:00", "14:00", 30);
+VALUES (1, "1,2,3", "08:00", "14:00", 30);
 INSERT INTO pessoas (id, nome, cpf, telefone, tipo, especialidade_id, agenda_id)
 VALUES (1, "Fulano Medico", "123.456.789-10", "(12) 12345-1234", 1, 1, 1);
 
 INSERT INTO agendas (id, carga_horaria, hora_inicio, hora_fim, tempo_intervalo)
-VALUES (2, "Segunda-feira, Terça-feira, Quarta-feira, Quinta-feira, Sexta-feira",
- "07:00", "20:00", 30);
+VALUES (2, "1,2,3,4,5", "07:00", "20:00", 30);
 INSERT INTO pessoas (id, nome, cpf, telefone, tipo, agenda_id)
 VALUES (2, "Ciclano Cliente", "123.456.789-10", "(12) 12345-1234", 0, 2);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
-VALUES (1, '2018-01-01 12:00:00', 1, 2);
+VALUES (1, '2018-12-17 10:00:00', 1, 2);
 INSERT INTO exames (id, consulta_id, equipamento_id)
 VALUES (1, 1, 1);
 INSERT INTO pagamentos (id, valor, tipo, convenio, matricula, consulta_id)
 VALUES (1, 10000, 1, 'UNIMED', '0000000001', 1);
 
 INSERT INTO consultas (id, data, medico_id, cliente_id)
-VALUES (2, '2018-01-01 15:00:00', 1, 2);
+VALUES (2, '2018-12-17 10:00:00', 1, 2);
 INSERT INTO pagamentos (id, valor, tipo, metodo, consulta_id)
 VALUES (2, 10000, 0, 'Dinheiro', 2);

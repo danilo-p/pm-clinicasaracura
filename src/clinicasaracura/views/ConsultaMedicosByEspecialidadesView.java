@@ -61,7 +61,7 @@ public class ConsultaMedicosByEspecialidadesView extends JPanel{
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
-                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView));
+                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView, 0));
                 }
             }
         });

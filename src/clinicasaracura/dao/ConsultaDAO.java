@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,27 +24,6 @@ import java.util.List;
  * @author danilo
  */
 public class ConsultaDAO extends GenericDAO {
-
-    public static void main(String[] args) throws SQLException {
-        ConsultaDAO consultaDAO = new ConsultaDAO();
-        ClienteDAO clienteDAO = new ClienteDAO();
-        MedicoDAO medicoDAO = new MedicoDAO();
-
-        Medico medico = medicoDAO.findById(1);
-        System.out.println("Consultas do medico " + medico.getNome());
-        List consultasMedico = consultaDAO.findByMedico(medico);
-        for (int i = 0; i < consultasMedico.size(); i++) {
-            System.out.println(consultasMedico.get(i));
-        }
-
-        Cliente cliente = clienteDAO.findById(2);
-        System.out.println("Consultas do cliente " + cliente.getNome());
-        List consultasCliente = consultaDAO.findByCliente(cliente);
-        for (int i = 0; i < consultasCliente.size(); i++) {
-            System.out.println(consultasCliente.get(i));
-        }
-    }
-
     private final MedicoDAO medicoDAO;
     private final ClienteDAO clienteDAO;
 
@@ -96,14 +76,16 @@ public class ConsultaDAO extends GenericDAO {
         return consultas;
     }
 
-    public List findByMedico(Medico medico) throws SQLException {
+    public List findByMedico(Medico medico, Timestamp inicio, Timestamp fim) throws SQLException {
         List consultas = new ArrayList();
 
-        String select = "SELECT * FROM consultas WHERE medico_id = ?";
+        String select = "SELECT * FROM consultas WHERE medico_id = ? AND data BETWEEN ? AND ?";
         Connection connection = getConnection();
         PreparedStatement stmt = connection.prepareStatement(select);
 
         stmt.setInt(1, medico.getId());
+        stmt.setTimestamp(2, inicio);
+        stmt.setTimestamp(3, fim);
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {

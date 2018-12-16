@@ -7,7 +7,6 @@ package clinicasaracura.views;
 
 import clinicasaracura.controllers.MedicosController;
 import clinicasaracura.models.Medico;
-import clinicasaracura.models.Pessoa;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -75,8 +74,7 @@ public class MedicosView extends JPanel{
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
                     System.out.println(medicoSelecionado.getNome());
-                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView));
-                    // TODO: Redirecionar para a página do medico quando tivermos uma
+                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView, 0));
                 }
             }
         });

@@ -244,31 +244,23 @@ public class CadastroMedicoView extends JPanel {
                 }
             } 
             
-            int cont = 0;
-            while (cont <= 2){
-                if (seg.isSelected()){
-                    dias[cont] = "Segunda-feira";
-                    cont++;
-                }
-                if (ter.isSelected()){
-                    dias[cont] = "Terça-feira";
-                    cont++;
-                }
-                if (qua.isSelected()){
-                    dias[cont] = "Quarta-feira";
-                    cont++;
-                }
-                if (qui.isSelected()){
-                    dias[cont] = "Quinta-feira";
-                    cont++;
-                }
-                if (sex.isSelected()){
-                    dias[cont] = "Sexta-feira";
-                    cont++;
-                }
+            String cargaHoraria = "";
+             if (seg.isSelected()){
+                cargaHoraria += "1,";
             }
-            
-            String cargaHoraria = String.join(",", dias);
+            if (ter.isSelected()){
+                cargaHoraria += "2,";
+            }
+            if (qua.isSelected()){
+                cargaHoraria += "3,";
+            }
+            if (qui.isSelected()){
+                cargaHoraria += "4,";
+            }
+            if (sex.isSelected()){
+                cargaHoraria += "5,";
+            }
+            cargaHoraria = cargaHoraria.substring(0, cargaHoraria.length() - 1);
             
             int intervalo = Integer.parseInt(textoIntervaloComboBox);
             
