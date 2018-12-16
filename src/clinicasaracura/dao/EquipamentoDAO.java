@@ -22,13 +22,13 @@ public class EquipamentoDAO extends GenericDAO{
     private EspecialidadeDAO especialidadeDAO;
     private AgendaDAO agendaDAO;
     
-    EquipamentoDAO()
+    public EquipamentoDAO()
     {
         this.especialidadeDAO = new EspecialidadeDAO();
         this.agendaDAO = new AgendaDAO();
     }
     
-    public void salvarEquipamento(Equipamento equip) throws SQLException{
+    public void salvar(Equipamento equip) throws SQLException{
         Agenda agenda = equip.getAgenda();
         this.agendaDAO.salvar(agenda);
         String insert = "INSERT INTO equipamentos(nome, especialidade_id, agenda_id) VALUES(?,?,?)";
