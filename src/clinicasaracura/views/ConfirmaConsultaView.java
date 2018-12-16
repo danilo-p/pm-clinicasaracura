@@ -49,6 +49,7 @@ public class ConfirmaConsultaView extends JPanel {
         this.add(clienteFieldPanel, BorderLayout.NORTH);
 
         //PEGA TEXTO DO COMBOBOX DE CLIENTES E GERA UMA VARIAVEL COM OS DADOS DAQUELE CLIENTE.
+        cliente = (Cliente) clientes.get(0);
         clienteComboBox.addActionListener((ActionEvent e) -> {
 
             textoClienteComboBox = (String) clienteComboBox.getSelectedItem();
@@ -97,7 +98,7 @@ public class ConfirmaConsultaView extends JPanel {
 
         this.add(valorFieldPanel, BorderLayout.CENTER);
 
-        //PEGA TEXTO DO COMBOBOX DE TIPOS DE PAGAMENTO E MONTA UM COMBOBOX COM AS OPCOES RESPECTIVAS.
+        textoPagamentoComboBox = (String) tipoPagamentoComboBox.getSelectedItem();
         tipoPagamentoComboBox.addActionListener((ActionEvent e) -> {
 
             textoPagamentoComboBox = (String) tipoPagamentoComboBox.getSelectedItem();

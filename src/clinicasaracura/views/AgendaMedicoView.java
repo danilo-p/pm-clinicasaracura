@@ -113,7 +113,7 @@ public class AgendaMedicoView extends JPanel {
         cal.add(Calendar.DATE, cargaHorariaInteiros[0]);
         Timestamp cargaHorariaInicio = new Timestamp(cal.getTimeInMillis());
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        cal.add(Calendar.DATE, cargaHorariaInteiros[cargaHorariaInteiros.length - 1]);
+        cal.add(Calendar.DATE, cargaHorariaInteiros[cargaHorariaInteiros.length - 1] + 1);
         Timestamp cargaHorariaFim = new Timestamp(cal.getTimeInMillis());
         List consultas = consultasController.getByMedico(medico, cargaHorariaInicio, cargaHorariaFim);
         for(int i = 0; i < consultas.size(); i++) {
@@ -132,7 +132,9 @@ public class AgendaMedicoView extends JPanel {
                 }
             }
 
-            if (diaSemanaConsultaIndice > 0 && horaConsultaIndice > 0) {
+            System.out.println(consulta);
+            System.out.println(diaSemanaConsultaIndice + "|||" + horaConsultaIndice);
+            if (diaSemanaConsultaIndice > 0 && horaConsultaIndice >= 0) {
                 Cliente cliente = consulta.getCliente();
                 dados[horaConsultaIndice][diaSemanaConsultaIndice] = cliente.getNome() + " - " + cliente.getTelefone();
             }
@@ -147,7 +149,6 @@ public class AgendaMedicoView extends JPanel {
                 int linha = table.getSelectedRow();
                 int coluna = table.getSelectedColumn();
                 if (mouseEvent.getClickCount() == 2 && linha >= 0 && coluna > 0) {
-                    System.out.println(linha + "|" + coluna);
                     cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
                     cal.add(Calendar.DATE, cargaHorariaInteiros[coluna - 1]);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
