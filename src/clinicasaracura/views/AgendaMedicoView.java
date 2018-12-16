@@ -24,6 +24,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -143,12 +144,15 @@ public class AgendaMedicoView extends JPanel {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table = (JTable) mouseEvent.getSource();
-                Point point = mouseEvent.getPoint();
-                int row = table.rowAtPoint(point);
-                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
-
-                    //Aqui iremos chamar a tela pra confirmar a consulta...(comando abaixo)
-                    Router.getInstance().goToView(new ConfirmaConsultaView(medico, "2018-12-12 10:00:00"));
+                int linha = table.getSelectedRow();
+                int coluna = table.getSelectedColumn();
+                if (mouseEvent.getClickCount() == 2 && linha >= 0 && coluna > 0) {
+                    System.out.println(linha + "|" + coluna);
+                    cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+                    cal.add(Calendar.DATE, cargaHorariaInteiros[coluna - 1]);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String dataNovaConsulta = sdf.format(cal.getTime()) + " " + dados[linha][0];
+                    Router.getInstance().goToView(new ConfirmaConsultaView(medico, dataNovaConsulta));
                 }
             }
         });
