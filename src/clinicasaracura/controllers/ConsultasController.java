@@ -6,12 +6,11 @@
 package clinicasaracura.controllers;
 
 import clinicasaracura.dao.ConsultaDAO;
-import clinicasaracura.models.Agenda;
 import clinicasaracura.models.Consulta;
 import clinicasaracura.models.Cliente;
 import clinicasaracura.models.Medico;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -27,23 +26,22 @@ public class ConsultasController {
         this.consultaDAO = new ConsultaDAO();
     }
     
-    public void criarConsulta(String dataHoraConsulta, Medico medico, Cliente cliente) throws ParseException {
-        
-        Consulta novaConsulta = new Consulta();
-        //Tentei fazer a conversão abaixo mas não rola, cai no ParseException
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");    
-        Date data = (Date) format.parse(dataHoraConsulta);
-        
-        novaConsulta.setData(data);
-        novaConsulta.setMedico(medico);
-        novaConsulta.setCliente(cliente);
-
+    public Consulta criarConsulta(String dataHoraConsulta, Medico medico, Cliente cliente) {
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp data = new Timestamp(sdf.parse(dataHoraConsulta).getTime());
+            Consulta novaConsulta = new Consulta(data, medico, cliente);            
             this.consultaDAO.salvar(novaConsulta);
+            return novaConsulta;
+        } catch (ParseException ex) {
+            System.out.println("ConsultasController: Falha ao converter data.");
+            System.out.println(ex);
         } catch (SQLException ex) {
             System.out.println("ConsultasController: Falha ao salvar consulta.");
             System.out.println(ex);
         }
+
+        return null;
     }
     
 }

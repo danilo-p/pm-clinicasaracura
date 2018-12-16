@@ -23,47 +23,47 @@ import java.util.List;
  * @author danilo
  */
 public class ConsultaDAO extends GenericDAO {
+
     public static void main(String[] args) throws SQLException {
         ConsultaDAO consultaDAO = new ConsultaDAO();
         ClienteDAO clienteDAO = new ClienteDAO();
         MedicoDAO medicoDAO = new MedicoDAO();
-        
+
         Medico medico = medicoDAO.findById(1);
         System.out.println("Consultas do medico " + medico.getNome());
         List consultasMedico = consultaDAO.findByMedico(medico);
-        for(int i = 0; i < consultasMedico.size(); i++) {
+        for (int i = 0; i < consultasMedico.size(); i++) {
             System.out.println(consultasMedico.get(i));
         }
-        
+
         Cliente cliente = clienteDAO.findById(2);
         System.out.println("Consultas do cliente " + cliente.getNome());
         List consultasCliente = consultaDAO.findByCliente(cliente);
-        for(int i = 0; i < consultasCliente.size(); i++) {
+        for (int i = 0; i < consultasCliente.size(); i++) {
             System.out.println(consultasCliente.get(i));
         }
     }
-    
+
     private final MedicoDAO medicoDAO;
     private final ClienteDAO clienteDAO;
-    
+
     public ConsultaDAO() {
         this.medicoDAO = new MedicoDAO();
         this.clienteDAO = new ClienteDAO();
     }
 
     public void salvar(Consulta consulta) throws SQLException {
-        
         String insert = "INSERT INTO consultas(data, medico_id, cliente_id) VALUES(?, ?, ?)";
         int id = save(insert, consulta.getData(), consulta.getMedico().getId(), consulta.getCliente().getId());
         if (id > 0) {
             consulta.setId(id);
         }
     }
-    
+
     public void alterar(Consulta consulta) throws SQLException {
         String update = "UPDATE consultas SET data = ?, medico_id = ?, cliente_id = ? WHERE id = ?";
         update(update, consulta.getData(),
-            consulta.getMedico().getId(), consulta.getCliente().getId());
+                consulta.getMedico().getId(), consulta.getCliente().getId());
     }
 
     public List findByCliente(Cliente cliente) throws SQLException {
@@ -79,7 +79,7 @@ public class ConsultaDAO extends GenericDAO {
         while (rs.next()) {
             Consulta consulta = new Consulta();
             consulta.setId(rs.getInt("id"));
-            consulta.setData(rs.getDate("data"));
+            consulta.setData(rs.getTimestamp("data"));
             consulta.setCliente(cliente);
 
             int medicoId = rs.getInt("medico_id");
@@ -95,7 +95,7 @@ public class ConsultaDAO extends GenericDAO {
 
         return consultas;
     }
-    
+
     public List findByMedico(Medico medico) throws SQLException {
         List consultas = new ArrayList();
 
@@ -109,7 +109,7 @@ public class ConsultaDAO extends GenericDAO {
         while (rs.next()) {
             Consulta consulta = new Consulta();
             consulta.setId(rs.getInt("id"));
-            consulta.setData(rs.getDate("data"));
+            consulta.setData(rs.getTimestamp("data"));
             consulta.setMedico(medico);
 
             int clienteId = rs.getInt("cliente_id");

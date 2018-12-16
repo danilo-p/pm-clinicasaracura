@@ -5,8 +5,7 @@
  */
 package clinicasaracura.models;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * Consulta para agenda.
@@ -16,13 +15,14 @@ import java.sql.Time;
 public class Consulta {
 
     private int id;
-    private Date data;
+    private Timestamp data;
     private Medico medico;
     private Cliente cliente;
-    
-    public Consulta() {}
-    
-    public Consulta(Date data, Medico medico, Cliente cliente) {
+
+    public Consulta() {
+    }
+
+    public Consulta(Timestamp data, Medico medico, Cliente cliente) {
         this.data = data;
         this.medico = medico;
         this.cliente = cliente;
@@ -36,11 +36,11 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getData() {
+    public Timestamp getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Timestamp data) {
         this.data = data;
     }
 
@@ -59,10 +59,10 @@ public class Consulta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     @Override
     public String toString() {
         return this.id + ", " + this.data + ", " + this.cliente.getNome()
-            + ", " + this.medico.getNome();
+                + ", " + this.medico.getNome();
     }
 }
