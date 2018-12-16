@@ -52,6 +52,7 @@ public class ConsultaMedicosByEspecialidadesView extends JPanel{
       
         JTable medicosTable = new JTable(linhas, titulos);
         medicosTable.setDefaultEditor(Object.class, null);
+        JPanel voltarView = this;
         medicosTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
@@ -60,7 +61,7 @@ public class ConsultaMedicosByEspecialidadesView extends JPanel{
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
-                    Router.getInstance().goToView(new AgendaMedicoViewConsulta(medicoSelecionado));
+                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView));
                 }
             }
         });

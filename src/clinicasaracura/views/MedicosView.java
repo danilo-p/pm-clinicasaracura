@@ -65,6 +65,7 @@ public class MedicosView extends JPanel{
 
         JTable medicosTable = new JTable(linhas, titulos);
         medicosTable.setDefaultEditor(Object.class, null);
+        JPanel voltarView = this;
         medicosTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
@@ -74,7 +75,7 @@ public class MedicosView extends JPanel{
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
                     System.out.println(medicoSelecionado.getNome());
-                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado));
+                    Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView));
                     // TODO: Redirecionar para a página do medico quando tivermos uma
                 }
             }

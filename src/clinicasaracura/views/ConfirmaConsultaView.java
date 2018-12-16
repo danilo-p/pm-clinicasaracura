@@ -136,7 +136,7 @@ public class ConfirmaConsultaView extends JPanel {
         JPanel botoesFieldPanel = new JPanel();
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new AgendaMedicoViewConsulta(medico));
+            Router.getInstance().goToView(new AgendaMedicoView(medico, this));
         });
         botoesFieldPanel.add(voltarButton);
 
