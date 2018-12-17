@@ -51,4 +51,14 @@ public class ClientesController {
             return new ArrayList<>();
         }
     }
+    
+    public Cliente getClienteByName(String nome) {
+        try {
+            return this.clienteDAO.findByName(nome);
+        } catch (SQLException ex) {
+            System.out.println("ClientesController: Falha ao recuperar cliente.");
+            System.out.println(ex);
+            return new Cliente();
+        }
+    }
 }

@@ -45,5 +45,15 @@ public class EspecialidadesController {
             return new ArrayList<>();
         }
     }
+	
+	public Especialidade getEspecialidadesByName(String nome) {
+        try {
+            return this.especialidadeDAO.findByName(nome);
+        } catch (SQLException ex) {
+            System.out.println("EspecialidadesController: Falha ao recuperar especialidades.");
+            System.out.println(ex);
+            return new Especialidade();
+        }
+    }
     
 }

@@ -25,7 +25,7 @@ public class Agenda {
     public Agenda() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
-            this.cargaHoraria = "Segunda-feira,Terça-feira,Quarta-feira,Quinta-feira,Sexta-feira";
+            this.cargaHoraria = "1,2,3,4,5";
             this.horaInicio = new Time(sdf.parse("07:00").getTime());
             this.horaFim = new Time(sdf.parse("19:00").getTime());
         } catch (ParseException ex) {

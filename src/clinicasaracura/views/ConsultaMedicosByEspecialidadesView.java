@@ -8,7 +8,6 @@ package clinicasaracura.views;
 import clinicasaracura.controllers.MedicosController;
 import clinicasaracura.models.Medico;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -21,35 +20,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-
 /**
  *
  * @author Bernardo Senna
  */
-public class MedicosView extends JPanel{
+public class ConsultaMedicosByEspecialidadesView extends JPanel{
     
-    public MedicosView(){
+    public ConsultaMedicosByEspecialidadesView(int id){
         
         this.setBorder(new EmptyBorder(15, 15, 15, 15));
         this.setLayout(new BorderLayout(15, 15));
-
-        JPanel tituloPanel = new JPanel();
-        tituloPanel.setLayout(new GridLayout(1, 2, 0, 0));
-
-        JLabel titulo = new JLabel("Médicos");
-        titulo.setAlignmentX(CENTER_ALIGNMENT);
-        tituloPanel.add(titulo);
-
-        JButton novoButton = new JButton("Novo");
-        novoButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new CadastroMedicoView());
-        });
-        tituloPanel.add(novoButton);
-
-        this.add(tituloPanel, BorderLayout.NORTH);
-
+        
+        JPanel tituloFieldPanel = new JPanel();        
+        JLabel tituloLabel = new JLabel("Selecione o médico:");
+        tituloFieldPanel.add(tituloLabel);
+        this.add(tituloFieldPanel, BorderLayout.NORTH);
+        
         MedicosController medicosController = new MedicosController();
-        List medicos = medicosController.getMedicos();
+        List medicos = medicosController.getMedicosByEspecialidadeId(id);
 
         String[] titulos = {"ID", "Nome", "CPF", "Telefone", "Especialidade"};
         Object[][] linhas = new Object[medicos.size()][5];
@@ -61,7 +49,7 @@ public class MedicosView extends JPanel{
             linhas[i][3] = medico.getTelefone();
             linhas[i][4] = medico.getEspecialidade().getNome();
         }
-
+      
         JTable medicosTable = new JTable(linhas, titulos);
         medicosTable.setDefaultEditor(Object.class, null);
         JPanel voltarView = this;
@@ -73,20 +61,18 @@ public class MedicosView extends JPanel{
                 int row = table.rowAtPoint(point);
                 if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
                     Medico medicoSelecionado = (Medico) medicos.get(table.getSelectedRow());
-                    System.out.println(medicoSelecionado.getNome());
                     Router.getInstance().goToView(new AgendaMedicoView(medicoSelecionado, voltarView, 0));
                 }
             }
         });
         
-
         JScrollPane scrollPane = new JScrollPane(medicosTable);
         medicosTable.setFillsViewportHeight(true);
         this.add(scrollPane, BorderLayout.CENTER);
-
+        
         JButton voltarButton = new JButton("Voltar");
         voltarButton.addActionListener((ActionEvent e) -> {
-            Router.getInstance().goToView(new HomeView());
+            Router.getInstance().goToView(new CadastroConsultaView());
         });
         this.add(voltarButton, BorderLayout.SOUTH);
     }
