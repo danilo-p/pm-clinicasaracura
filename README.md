@@ -2,14 +2,22 @@
 
 ## Instalação
 
-- Instale o banco de dados mariadb:
-```shell
-$ sudo apt-get install mariadb
-```
+- Instale o NetBeans:
 
 - Clone o repositório utilizando o comando:
 ```shell
 $ git clone git@github.com:danilo-p/pm-clinicasaracura.git
+```
+
+- Adicione o projeto clinicasaracura ao NetBeans.
+
+- Faça download do conector JDBC para mariadb: https://downloads.mariadb.com/Connectors/java/connector-java-2.6.2/mariadb-java-client-2.6.2.jar
+
+- Adicione o arquivo .jar como driver de banco de dados do projeto.
+
+- Instale o banco de dados mariadb:
+```shell
+$ sudo apt-get install mariadb
 ```
 
 - Entre na pasta do repositório e execute o script para criar o banco:
@@ -19,8 +27,6 @@ $ mysql -u root < create_db.sql
 *Obs 1: Esse script remove o banco e o cria novamente, inserindo  alguns dados iniciais.*
 
 *Obs 2: Você pode executar esse script várias vezes, porém perderá os seus dados do banco.*
-
-- Adicione o projeto no NetBeans. Não testei em outra IDE, mas acredito que você não vai ter problemas se tentar.
 
 
 ##  Links úteis
